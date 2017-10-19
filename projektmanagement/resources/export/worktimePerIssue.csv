@@ -1,0 +1,145 @@
+issue_id,issue_title,estimated,spent,milestone
+147,Autorisierung implementieren,0.0,0.0,Folgeprojekt
+146,Projektabgabe,1.0,1.0,Sprint 7
+145,Abschlusspräsentation halten,4.0,4.0,Sprint 7
+144,Alle Dokumente auf aktuallität prüfen,0.0,0.0,Sprint 7
+143,Abschlussfeier vorbereiten,0.5,0.0,Sprint 7
+142,Gitlab aufräumen,0.5,0.5,Sprint 7
+141,Schlussabgabe vorbereiten,8.0,4.0,Sprint 7
+140,Labels und Velocity updaten,0.25,0.25,Sprint 7
+139,Zeitauswertung fixieren,0.5,0.25,Sprint 7
+138,Zeitauswertung machen,2.0,2.0,Sprint 7
+137,Benutzeranleitung erstellen,2.0,2.0,Sprint 7
+136,Konzept Review/Approval überarbeiten,0.0,0.0,Folgeprojekt
+135,Fortschrittsbalken während der Korrektur / Review anzeigen,0.0,0.0,Folgeprojekt
+134,Felder Kommentar und Begründung zusammenfassen,0.0,0.0,Folgeprojekt
+133,Reviews und Korrekturen müssen editierbar sein,0.0,0.0,Folgeprojekt
+132,Korrektur-Button nach abgeschlossener Korrektur deaktivieren,0.0,0.0,Folgeprojekt
+131,Beschriftungen / Naming überarbeiten,0.0,0.0,Folgeprojekt
+130,Bedienbarkeit des Login-Screens verbessern,0.0,0.0,Folgeprojekt
+129,Inkonsistente Testdaten bei ExerciseSolution,0.5,0.0,Sprint 7
+128,Packages der DAOs in Zwei Unterpakete aufteilen,0.0,0.0,Folgeprojekt
+127,Freemarker-Helper für Reviewen / Korrigieren,0.0,0.0,Folgeprojekt
+126,Dynamic Proxy für Error-Hanlding und Logging,0.0,0.0,Folgeprojekt
+125,Kommentare der Interfaces im DB und Service Layer überarbeiten,0.0,0.0,Folgeprojekt
+124,Mitteilungen nach Weiterleitung auf Exam wenn Korrektur komplett,0.0,0.0,Folgeprojekt
+123,IDs in der URL verifizieren,0.0,0.0,Folgeprojekt
+122,Abschlusspräsentation  / Schlussbericht vorbereiten,8.0,4.0,Sprint 6
+121,UI-Tests fixen,4.0,2.0,Sprint 6
+120,Order-By bei DB-Abfragen ergänzen,1.0,0.75,Sprint 6
+119,Layout fixing / improving,4.0,12.333333333333334,Sprint 6
+118,Participant Informationen View,1.5,2.5,Sprint 6
+117,Einzelansicht Exercise implementieren,1.5,6.0,Sprint 6
+116,Projektverlauf und Sprint-Labels anpassen,0.5,0.0,Sprint 6
+115,Approval implementieren,4.0,5.0,Sprint 6
+114,Benutzer auf Korrektur/Review-Screen,0.5,0.0,Sprint 6
+113,Sonar Probleme beheben,1.0,2.0,Sprint 6
+112,Transition der Stati Corretion,8.0,7.0,Sprint 6
+111,Verschiedene Deployment-Varianten dokumentieren,1.0,1.0,Sprint 7
+110,unerwartete NullPointerException bei participants,0.0,0.0,Sprint 5
+109,korrektes Encoding bei Eingabefeldern,0.0,0.5,Sprint 5
+108,XSS bei Eingabefelder,1.5,1.5,Sprint 6
+107,Maximale Zeilenbreite in Checkstyle anpassen,0.5,0.5,Sprint 6
+106,konsistentes Error-Handling,1.0,2.0,Sprint 6
+105,Access-Modifier in Interfaces entfernen,0.5,0.5,Sprint 6
+104,Gruppen Code-Review,8.0,8.0,Sprint 6
+103,konsistente JavaDoc-Führung,0.0,0.0,Folgeprojekt
+102,Usability Tests planen / durchführen,4.0,6.0,Sprint 6
+101,Architekturdokumentation ergänzen,0.5,0.0,Sprint 7
+100,Konsistenzprüfungen vor Abgabe durchgehen,3.0,3.0,Sprint 7
+99,Titel von TextExercise nach Exercise verschieben,1.0,0.25,Sprint 6
+98,Styling des UI,3.0,2.0,Sprint 5
+97,Notenberechnung anhand Status berechnen,4.0,7.0,Sprint 5
+96,Einfache Erstellung der kompletten Coverage,3.0,2.0,Sprint 5
+95,View erstellen mit Liste aller Exams,1.0,1.75,Sprint 5
+94,Participant Aufgaben View erstellen,4.0,4.0,Sprint 5
+93,"Dashboard ""Meine Prüfungen"" Felder Status und Fortschritt ergänzen",0.0,0.0,Folgeprojekt
+92,Equals / Hashcode löschen,0.25,0.25,Sprint 5
+91,Projektverlauf und Sprint-Labels anpassen,0.5,0.5,Sprint 5
+89,Online Prüfungseinsicht für Studenten,0.0,0.0,Folgeprojekt
+88,Exam Auswertung View erstellen,8.0,14.5,Sprint 5
+87,Folgetask: Aufgaben korrigieren und reviewen,6.0,8.0,Sprint 5
+86,ToDo's auf Dashboard anzeigen,4.0,1.5,Sprint 5
+85,Prüfung prüfungsweise korrigieren,4.0,9.0,Sprint 5
+84,einfache Login-Möglichkeit,7.0,9.0,Sprint 5
+83,Use RoutingBuilder in templates to build links,0.0,0.0,Folgeprojekt
+82,ExamExercises View erstellen,4.0,5.0,Sprint 4
+81,Breadcrumb für Exam/Participation/Solutions implementieren,6.0,7.0,Sprint 4
+80,Notenskala modifizierbar machen,0.0,0.0,Folgeprojekt
+79,Exception Handling,4.0,6.0,Sprint 4
+78,Integration Tests für Services,7.0,10.5,Sprint 4
+77,Review Architektur / Design vorbereiten,2.0,3.0,Sprint 4
+76,Aufgaben korrigieren und reviewen,5.0,3.0,Sprint 4
+75,ExamParticipation View erstellen,8.0,8.5,Sprint 4
+74,Auf Google Guice umstellen,3.0,2.5,Sprint 4
+73,Funktion Prüfung aufgabenweise korrigieren,2.0,5.0,Sprint 4
+72,Schema-Änderungen Exam / Exercise,2.0,1.5,Sprint 4
+71,Excercise Typo Refactoring,0.0,2.0,Sprint 3
+70,JDBC-Treiber sauber abmelden beim abmelden bei Tomcat.,0.0,0.0,Folgeprojekt
+69,Funktion Prüfung aufgabenweise korrigieren,7.0,5.0,Sprint 3
+68,Projektplan/Projektverlauf aktualisieren,1.0,0.0,Sprint 3
+67,ExerciseSolution View erstellen,4.5,7.0,Sprint 3
+66,Exam View Information Tab erstellen,5.5,6.0,Sprint 3
+65,Unique identifier für Prüfungen,0.0,0.0,Folgeprojekt
+64,Dashboard View erstellen,4.0,4.0,Sprint 3
+63,Beispieldaten für Prüfungen erstellen,4.0,5.0,Sprint 3
+62,CI mit Integrationtest aufsetzen,4.0,4.0,Sprint 3
+61,Selenium aufsetzen,6.0,4.0,Sprint 3
+59,Entscheide zu nichtfunktionale Anforderungen in Architekturdokumentation ergänzen,1.0,0.25,Sprint 3
+58,Review Examibur End of Elaboration,5.0,5.0,Sprint 3
+57,Deployment Diagramm und Beschreibung in Architekturdokumentation ergänzen,1.0,0.5,Sprint 3
+56,Logging / Exception Handling aufsetzen,2.0,2.5,Sprint 3
+55,Automatische DB-Migrationen implementieren,5.0,5.0,Sprint 3
+54,Busines-Layer muss auf Abhängigkeiten (wie Postgres) bei der Initialisierung warten,0.0,0.0,
+53,Grundstruktur Architektur implementieren,4.5,7.0,Sprint 2
+52,Datenmodell auf DB abbilden,3.5,9.25,Sprint 2
+51,Anforderungsspez fertigstellen und Dashboard aktualisieren,0.0,0.0,Sprint 2
+50,Architektur Dokumentation erstellen,2.0,3.0,Sprint 2
+49,Recherche: Verwendung von Docker mit Eclipse /CI/CD,1.0,1.5,Sprint 2
+48,add readme file with badges,0.0,0.08333333333333333,Sprint 1
+47,Übersicht mit Milestones und zugehörigen Issues + Backlog erstellen,2.0,0.0,Sprint 2
+46,gitlab static page relative Pfade,0.0,0.16666666666666666,Sprint 1
+45,Logo und Navbar auf Gitlab Page,0.0,1.0,Sprint 1
+44,Arbeitsstunden Report Gitlab Page,3.0,6.0,Sprint 1
+43,Review Architektur / Design,4.0,4.0,Sprint 4
+41,Review  Anforderungen und Analyse,4.0,6.0,Sprint 2
+40,Retrospektive 3,4.0,4.0,Sprint 5
+39,Retrospektive 2,4.0,0.0,Sprint 4
+38,Retrospektive 1,4.0,1.3333333333333333,Sprint 2
+37,Review Projektplan,6.0,4.0,Sprint 1
+36,Stand-up Meetings Sprint 7,0.5,0.5,Sprint 7
+35,Stand-up Meetings Sprint 6,2.0,2.0,Sprint 6
+34,Stand-up Meetings Sprint 5,2.6666666666666665,2.6666666666666665,Sprint 5
+33,Stand-up Meetings Sprint 4,2.6666666666666665,1.3333333333333333,Sprint 4
+32,Stand-up Meetings Sprint 3,1.3333333333333333,2.0,Sprint 3
+31,Stand-up Meetings Sprint 2,2.6666666666666665,2.0,Sprint 2
+30,Stand-up Meetings Sprint 1,2.6666666666666665,2.6666666666666665,Sprint 1
+29,Sprint Planning Sprint 7,4.0,4.0,Sprint 7
+28,Sprint Planning Sprint 6,8.0,8.0,Sprint 6
+27,Sprint Planning Sprint 5,8.0,8.0,Sprint 5
+26,Sprint Planning Sprint 4,8.0,8.0,Sprint 4
+25,Sprint Planning Sprint 3,8.0,8.0,Sprint 3
+24,Sprint Planning Sprint 2,8.0,8.0,Sprint 2
+23,Sprint Planning Sprint 1,8.0,5.0,Sprint 1
+22,Schlussbericht schreiben,6.0,6.0,Sprint 7
+21,Vorbereitung Abschlusspräsentation,8.0,8.0,Sprint 7
+20,Zeitplan / Projektplanung,16.0,1.0,
+19,Prototyping Frontend,10.0,12.5,Sprint 2
+18,Prototyping Backend,0.0,0.0,Sprint 2
+17,Metriken/Resultate in Abschlussdokumentationen kopieren,0.5,0.0,Sprint 7
+16,Testprotokolle in Abschlussdokumentationen kopieren,0.5,0.0,Sprint 7
+15,Datenmodell erstellen,2.0,3.0,Sprint 2
+14,Architektur-Schichten Diagramm erstellen,8.0,8.25,Sprint 2
+13,Architektur-Entscheidungen treffen,8.0,0.0,Sprint 1
+12,Nicht-funktionale Anforderungen abklären,4.0,4.5,Sprint 1
+11,Wireframes & Personas erstellen,8.0,8.5,Sprint 1
+10,Domain Modell erstellen,8.0,8.25,Sprint 1
+9,Use Case erfassen,16.0,11.0,Sprint 1
+8,Infrastruktur Betrieb,0.0,4.5,
+7,Infrastruktur Aufbau,10.0,15.0,Sprint 2
+6,Ergänze Gitlab-Export für Sprintabrechnung,1.0,0.5,Sprint 0
+5,Recherche Infrastruktur,2.0,1.75,Sprint 1
+4,Export Stundenabrechnung aus Gitlab,0.0,1.0,Sprint 1
+3,Projektplan schreiben,30.0,51.5,Sprint 0
+2,Framework Recherche,5.0,6.0,Sprint 1
+1,Projektantrag schreiben,0.0,6.0,Sprint 0

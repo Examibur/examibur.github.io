@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Examibur - Nicht-funktionale Anforderungen</title>
+
+    
+    
+    
+
+        <link href="../website/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../website/css/custom.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="..">
+            <img src="../website/images/logo-white-transparent-rotated.png">
+            Examibur
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+        <a href="../index.html">
+            <div class="container">
+                <h1>Nicht-funktionale Anforderungen</h1>
+            </div>
+        </a>
+        </a>
+    </div>
+
+    <div class="container">
+        <h1 id="einf-hrung">Einführung</h1>
+
+<h2 id="zweck">Zweck</h2>
+
+<p>Dieses Dokument beschreibt die Anforderungsspezifikation. Es wird der Fokus auf die nicht-funktionalen Anforderungen gelegt. Die nicht-funktionalen Anforderungen sind gemäss ISO 9126 gruppiert und spezifiziert. Es ist ersichtlich, welche Anforderungen Scope des Engineering-Projekts sind und welche Anforderungen für Folgeprojekte vorgesehen sind und zwingend umgesetzt werden müssen. Aus Gründen der Übersichtlichkeit sind die funktionalen Anforderungen in einem <a href="funktionaleAnforderungen.html">separaten Dokument</a> beschrieben.</p>
+
+<h2 id="g-ltigkeitsbereich">Gültigkeitsbereich</h2>
+
+<p>Der Gültigkeitsbereich beschränkt sich auf die Projektdauer vom 20.02.17 bis 02.06.17. Während dieser Zeit wird das Dokument laufend aktualisiert und stellt zu jedem Zeitpunkt einen genauen Überblick über die nicht-funktionalen Anforderungen zur Verfügung.</p>
+
+<h2 id="referenzen">Referenzen</h2>
+
+<p>In der nachfolgenden Tabelle sind alle Dokumente und Links aufgelistet, welche für die nicht-funktionalen Anforderungen  von Relevanz sind. Diese Liste wird laufend auf dem aktuellen Stand gehalten.</p>
+
+<table><thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><strong>Referenz</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>funktionale Anforderungen</td>
+<td><a href="funktionaleAnforderungen.html">funktionale Anforderungen </a></td>
+</tr>
+<tr>
+<td>ISO 9126</td>
+<td><a href="http://www.cse.unsw.edu.au/%7Ecs3710/PMmaterials/Resources/9126-1%20Standard.pdf">ISO 9126</a></td>
+</tr>
+<tr>
+<td>Empfehlungen und Schlüssellängen des BSI</td>
+<td><a href="https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR02102/BSI-TR-02102.pdf;jsessionid=D931A7BAEAA3051CEC548F944E39CA15.1_cid360?__blob=publicationFile&amp;v=3">BSI TR-02102-1, Version 2017-01</a></td>
+</tr>
+<tr>
+<td>DSG</td>
+<td><a href="https://www.admin.ch/opc/de/classified-compilation/19920153/index.html#a7">DSG Art. 7</a></td>
+</tr>
+<tr>
+<td>Reglement der HSR</td>
+<td><a href="resources/BSc_Pruefungsreglement_Neuausgabe_15._Dezember_2016.pdf">Reglement der HSR (Stand 15. Dezember 2016)</a></td>
+</tr>
+</tbody></table>
+
+<h1 id="nicht-funktionale-anforderungen">Nicht-funktionale Anforderungen</h1>
+
+<p>Die nicht-funktionalen Anforderungen sind in den folgenden Kapiteln gemäss ISO 9126 gruppiert.</p>
+
+<figure>
+<img src="resources/iso_9126_quality_model.png">
+<figcaption>Quality-Modell Framework gemäss <a href="http://www.cse.unsw.edu.au/~cs3710/PMmaterials/Resources/9126-1%20Standard.pdf">ISO 9126</a></figcaption>
+</figure>
+
+<p>Im Rahmen des Engineering-Projekts können nicht alle nicht-funktionalen Anforderungen komplett umgesetzt werden, da dies den Zeitrahmen sprengen würde.
+Alle aufgelisteten nicht-funktionalen Anforderungen wurden beim Design beachtet. Im Engineering-Projekt werden aber nur die fett-markierten Anforderungen komplett umgesetzt.</p>
+
+<h2 id="funktionalit-t-functionality">Funktionalität (Functionality)</h2>
+
+<ol>
+<li><strong>Während der Korrektur müssen alle Prüfungen anonym/pseudonym sein, damit Sympathie, Hautfarbe, Geschlecht oder Herkunft von Studierenden keinen Einfluss auf die Noten haben.</strong> (suitability)</li>
+<li><strong>Die resultierenden Note muss auf 2 Nachkommastellen genau angegeben und mathematisch auf bzw. abgerundet werden.</strong> (accuracy)</li>
+<li><strong>Die Berechnung der resultierenden Note muss genau aufgeschlüsselt dargestellt werden, damit deren Berechnung nachvollzogen werden kann.</strong>  (accuracy)</li>
+<li><strong>Es müssen weitere Notensysteme innerhalb von 5 Arbeitstagen integriert werden können, um das Produkt auch im Ausland vertreiben zu können.</strong> (interoperability)</li>
+<li><strong>Die Anbindung an eine andere Datenbank-Schnittstelle muss innerhalb von 10 Tagen realisiert werden können.</strong> (interoperability)</li>
+<li><strong>Änderungen an Noten und Korrekturen müssen immer mit Autor, Datum und getätigten Änderungen protokolliert werden, damit die Korrektur stets nachvollzogen werden kann.</strong> (security)</li>
+<li><strong>Review-Kommentare dürfen nicht für alle Benutzer (Bsp. Studenten) einsehbar sein, da diese nur dem internen Austausch im Review-Prozess dienen.</strong> (security)</li>
+<li><strong>Das System darf keine Passwörter speichern. Die Authentifizierung und Autorisierung erfolgt ausschliesslich über Drittsysteme (Bsp. LDAP), damit die Passwörter zentral verwaltet und abgesichert werden.</strong> (security)</li>
+<li>Bestehende Infrastruktur für Authentifizierung und Autorisierung (LDAP) muss ohne den Zwang, neue Gruppen zu definieren, verwendet werden können. (interoperability)</li>
+<li>Die resultierenden Noten müssen über eine API exportiert werden können, damit die Anwendung mit bestehenden Systemen (Bsp. Adunis) kombiniert werden kann.  (interoperability)</li>
+<li>Die Noten müssen beim Export signiert werden, damit deren Echtheit und Integrität verifiziert werden kann. (security)</li>
+<li>Sämtliche Daten dürfen nur über verschlüsselte Verbindungen übertragen werden, die minimal den <a href="https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Publikationen/TechnischeRichtlinien/TR02102/BSI-TR-02102.pdf;jsessionid=D931A7BAEAA3051CEC548F944E39CA15.1_cid360?__blob=publicationFile&amp;v=3">Empfehlungen und Schlüssellängen des BSI (BSI TR-02102-1, Version 2017-01)</a> entsprechen. (security)</li>
+<li>Die Daten müssen gemäss <a href="https://www.admin.ch/opc/de/classified-compilation/19920153/index.html#a7">DSG Art. 7</a> vor unbefugtem Zugriff geschützt sein. (security)</li>
+<li>Manipulationen auf der Datenbank müssen automatisch erkannt werden, um Manipulation über den Direktzugriff auf die Datenbank zu verhindern. (security)</li>
+<li>Die digitale Archivierung muss gemäss dem <a href="https://www.hsr.ch/index.php?eID=tx_nawsecuredl&amp;u=0&amp;g=0&amp;t=1489320430&amp;hash=f9d9dba4e0bff31b13f5819829b710d15dc25654&amp;file=fileadmin/user_upload/customers/hsr/HSR-INTERN/Schulleitung/Reglemente/BSc_Pruefungsreglement_Neuausgabe_15._Dezember_2016.pdf">Reglement der HSR (Stand 15. Dezember 2016)</a> erfolgen. (compliance)</li>
+</ol>
+
+<h2 id="zuverl-ssigkeit-reliability">Zuverlässigkeit (Reliability)</h2>
+
+<ol>
+<li><strong>Die Integrität der Daten darf ausnahmslos nie verletzt werden, da Prüfungen Dokumente mit rechtlicher Bindung sind.</strong> (maturity, fault tolerance)</li>
+<li><strong>Bei einem kompletten Systemausfall muss das Gesamtsystem innerhalb von 24 Stunden von einer Person wiederhergestellt werden können.</strong> (recoverability)</li>
+<li><strong>Ausnahmefehler dürfen das System nicht zum Absturz bringen.</strong> (fault tolerance)</li>
+<li>Bei kritschen Fehlern, wie beispielsweise fehlender Speicherplatz, wird die Systemadministration umgehend informiert und den Benutzern eine verständliche Meldung angezeigt. (fault tolerance)</li>
+<li>99% Verfügbarkeit während der Korrekturphase, da eine Prüfungskorrektur sonst nicht möglich ist. (maturity)</li>
+<li>200 oder mehr Nutzer (skalierbar) müssen die Anwendung gleichzeitig nutzen können, da die Prüfungskorrektur nur zweimal jährlich im gleichen Zeitraum stattfindet.</li>
+</ol>
+
+<h2 id="benutzbarkeit-usability">Benutzbarkeit (Usability)</h2>
+
+<ol>
+<li><strong>Für den Korrektor muss nach der Anmeldung sofort ersichtlich sein, welche Aufgaben seine Aufmerksamkeit erfordern.</strong> (understandability)</li>
+<li><strong>Für das Verständnis der Bedienung der Anwendung muss nur der Ablauf des Prüfungsprozesses bekannt sein.</strong> (learnability)</li>
+<li>Zu jedem Zeitpunkt muss der Benutzer effizient Hilfe im Handbuch finden können (Bsp. Name der Aktivität gut sichtbar und Benutzerdokumentation nach Aktivitäten aufgebaut). (learnability)</li>
+<li><strong>Für das ganze System muss ein einheitliches Stylesheet verwendet werden.</strong> (operability)</li>
+<li>Ein Hilfe-Button zeigt zu jeder Aktivität einen Link an die entsprechende Stelle der Benutzerdokumentation. (learnability)</li>
+<li>Vorgenommene Korrekturen werden zwischengespeichert, damit beispielsweise bei einem Browser-Absturz nicht die Arbeit von &gt;1 Minute verloren geht.</li>
+</ol>
+
+<h2 id="effizienz-efficiency">Effizienz (Efficiency)</h2>
+
+<ol>
+<li>Das System muss innerhalb von max. 0.5 Sekunden nach Starten der Aktion durch den Nutzer antworten, auch wenn 200 Nutzer die Anwendung parallel verwenden. (time behaviour)</li>
+</ol>
+
+<h2 id="nderbarkeit-maintainability">Änderbarkeit (Maintainability)</h2>
+
+<ol>
+<li><strong>Jede Änderung an einer Korrektur muss protokolliert werden.</strong> (analysability)</li>
+<li><strong>Alle Fehler müssen automatisch protokolliert werden.</strong> (analysability)</li>
+<li><strong>Dynamische Konfigurationen von Prüfungsreglementen / Modulstrukturen für andere Hochschulen müssen innerhalb von 30 Arbeitstagen eingefügt werden können.</strong> (changability)</li>
+<li><strong>Neue Prüfungsaufgabentypen (Bsp. Multiple-Choice) müssen innerhalb von 10 Arbeitstagen eingeführt werden können.</strong></li>
+<li><strong>Die Business-Logik und alle Use-Cases müssen mit automatischen Unit-Tests abgedeckt sein</strong>. (testability)</li>
+<li><strong>Alle Use-Cases des Web-Interfaces müssen über automatische Tests abgedeckt sein</strong>. (testability)</li>
+<li>Automatische Updates müssen ohne manuelles Eingreifen eingespielt werden können (stability)</li>
+</ol>
+
+<h2 id="bertragbarkeit-portability">Übertragbarkeit (Portability)</h2>
+
+<ol>
+<li><strong>Das System muss auch als Docker-Image ausgeliefert werden, um eine schnelle Installation zu ermöglichen.</strong> (installability)</li>
+<li><strong>Das System verwendet keine proprietären Datenbankfunktionen, um deren Austauschbarkeit zu gewährleisten.</strong> (comformance)</li>
+<li>Die Software muss auf Linux und Windows-Servern deployed werden können. (adaptability)</li>
+<li>Die Daten müssen in einem Format vorgehalten bzw. exportiert werden, welches auch von anderen Systemen gelesen werden kann (Bsp. JSON/CSV). (replaceability)</li>
+</ol>
+
+
+        <hr>
+
+        <footer>
+            <p>&copy; 2017 Jonas Matter, Patrick Scherler, Robin Suter, Raphael Zimmermann</p>
+        </footer>
+    </div>
+</body>
+
+</html>

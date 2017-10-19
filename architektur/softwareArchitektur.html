@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Examibur - Software Architektur</title>
+
+    
+    
+    
+
+        <link href="../website/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../website/css/custom.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="..">
+            <img src="../website/images/logo-white-transparent-rotated.png">
+            Examibur
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+        <a href="../index.html">
+            <div class="container">
+                <h1>Software Architektur</h1>
+            </div>
+        </a>
+        </a>
+    </div>
+
+    <div class="container">
+        <h1 id="einf-hrung">Einführung</h1>
+
+<h2 id="zweck">Zweck</h2>
+
+<p>Ziel des Dokuments ist es, dem Leser einen Überblick über den Aufbau der Architektur und die Entscheidungen die dazu geführt haben, zu geben.</p>
+
+<h2 id="g-ltigkeitsbereich">Gültigkeitsbereich</h2>
+
+<p>Der Gültigkeitsbereich beschränkt sich auf die Projektdauer vom 20.02.17 bis 02.06.17. Während dieser Zeit wird das Dokument laufend aktualisiert und stellt zu jedem Zeitpunkt einen genauen Überblick über das Projekt zur Verfügung.</p>
+
+<h2 id="referenzen">Referenzen</h2>
+
+<p>In der nachfolgenden Tabelle sind alle Dokumente und Links aufgelistet, welche für das Projekt von Relevanz sind. Diese Liste wird laufend auf dem aktuellen Stand gehalten.</p>
+
+<table><thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><strong>Referenz</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Freemarker</td>
+<td><a href="http://freemarker.org/">http://freemarker.org/</a></td>
+</tr>
+<tr>
+<td>Bootstrap</td>
+<td><a href="http://getbootstrap.com/">http://getbootstrap.com/</a></td>
+</tr>
+</tbody></table>
+
+<h1 id="software-architektur">Software Architektur</h1>
+
+<h2 id="programmkonstruktbildung-mit-schichtenmodellbezug">Programmkonstruktbildung mit Schichtenmodellbezug</h2>
+
+<p><img src="resources/softwareArchitektur/schichtenDiagram.png" alt=""></p>
+
+<p>In diesem Abschnitt wird vertiefter in die einzelnen Teile bis auf die Top-Level-Konstrukte eingegangen. Nachfolgend werden die einzelnen Schichten und Konstrukte weiter ausgeführt. <strong>Grau markierte Schichten sind nicht Scope des Projekts und werden weggelassen. So erfolgt der Zugriff des UI direkt auf die Business-Schicht und auf ein Benutzeraktion-Tracking für Auditing-Zwecke wird verzichtet.</strong>. Weitere details dazu finden sich im Abschnitt <a href="#deployment-varianten">Deployment-Varianten</a></p>
+
+<h3 id="ui-layer">UI-Layer</h3>
+
+<h4 id="application">Application</h4>
+
+<p>Application ist der zentrale Einstiegspunkt der Spark-Applikation.
+Das Routing der Requests auf die einzelnen Controller wird in dieser Schicht durchgeführt.</p>
+
+<h4 id="routing">routing</h4>
+
+<p>Das Routing-Paket hängt Controller, Filter und URLs zur gemeinsamen Applikation zusammen.</p>
+
+<h4 id="controller">controller</h4>
+
+<p>Die clientspezifische Business-Logik ist in dieser Schicht enthalten. So werden unter anderem die Serviceaufrufe auf die Business-Layer abgewickelt.
+Dazu gehört auch das Aufbereiten der Daten in die clientinternen Datenmodelle, das Überführen in die zuständigen Views sowie das Abarbeiten von Events.
+Alle Controller-Methoden müssen Thread-Safe implementiert sein!</p>
+
+<h4 id="filter">filter</h4>
+
+<p>Enthält Spark-Filtermethoden, welche die Bearbeitung von Requests in den Controllern vereinfacht, inklusive Umleitungen, wenn der Benutzer nicht angemeldet ist.</p>
+
+<h4 id="url">url</h4>
+
+<p>Enthält die Definitionen der URLs sowie Hilfsklassen für interne URLs.</p>
+
+<h4 id="renderer">renderer</h4>
+
+<p>Eine Thread-sichere Rendering-Implementation, welche von den Controllern verwendet wird.</p>
+
+<h4 id="model">model</h4>
+
+<p>Enthält UI-Spezifische Modelle. Wann immer möglich wird aber der Domain-Layer direkt verwendet. </p>
+
+<h3 id="rest-oder-rpc">REST oder RPC</h3>
+
+<p>Diese Schicht agiert als Proxy zwischen der clientspezifischen Business Logik und der Business Schicht. <strong>In einem ersten Schritt wird diese Schicht weggelassen.</strong> Falls die Applikation auf eine verteilte Applikation umgestellt werden muss, sei dies aus Performance- oder Sicherheits-Gründen, kann diese Schicht schnell dazwischen geschaltet werden.</p>
+
+<p>Es würde sich dabei um Proxy-Methoden halten, die die Aufrufe einfach in die Business-Schicht weiterleiten und keine eigene Logik enthalten.</p>
+
+<h3 id="business">business</h3>
+
+<p>Die Business Logik der eigenen Services und für die Aufbereitung von Daten der Datenbank ist in dieser Schicht enthalten. Die Business-Schicht ist im wesentlichen die effektive Implementation der Service-Schicht.</p>
+
+<h3 id="messaging">messaging</h3>
+
+<p>Enthält die Queue für das Tracking der Benutzeraktionen. Jede ausgeführte Aktion erzeugt eine Nachricht, die in diese Queue gestellt wird.</p>
+
+<p><strong>In einem ersten Schritt wird auf den Einsatz einer Message-Queue verzichtet.</strong></p>
+
+<p>Lösungen wie ActiveMQ könnten hier in Betracht gezogen werden.</p>
+
+<h3 id="service">Service</h3>
+
+<p>Beschreibt die Schnittstellendefinition des Business-Layers. Diese Auslagerung ermöglicht es, die Business- und die Darstellungslogik in Zukunft zu trennen.
+Alle Service-Methoden müssen Thread-Safe implementiert sein!</p>
+
+<h4 id="exception">exception</h4>
+
+<p>Definiert eigene Exceptions, welche alle von <code>ExamiburException</code> erben. Dies vereinfacht die Service-Schnittstellen und Fehlerbehandlung auf den Clients.</p>
+
+<h3 id="integration">integration</h3>
+
+<p>In dieser Schicht werden die Queries zur Datenbank abgesetzt, in die Domain-Objekte geladen und von den Objekten wieder zurück in die Datenbank geschrieben.</p>
+
+<h4 id="migration">migration</h4>
+
+<p>In dieser Schicht werden die einzelnen Datenbank-Patches gespeichert. Dies ermöglicht eine automatische Aktualisierung der Datenbank auf dem lokalen Entwicklungssystem und der Produktion während dem Build-Prozess.</p>
+
+<h3 id="domain">domain</h3>
+
+<p>Hier sind die Domain-Objekte enthalten, welche die Datenbanken abbilden. Auf den Domain-Objekten wird auch das objektrelationale Mapping durchgeführt. Für das Mapping wird EclipseLink verwendet.</p>
+
+<h4 id="aggregation">aggregation</h4>
+
+<p>Enthält aggregierte Informationen. Grundsätzlich wird das Domain-Model wenn möglich direkt verwendet.</p>
+
+<h2 id="design-entscheide">Design-Entscheide</h2>
+
+<h3 id="persistenz">Persistenz</h3>
+
+<p>Die vom Benutzer und dem System erzeugten Daten werden in einer relationalen Datenbank persistiert.
+Das OR-Mapping von der Datenbank zu den Java-Objekten wird anhand des <a href="#datenmodell">Datenmodells</a> mit EclipseLink umgesetzt.</p>
+
+<h3 id="logging-error-und-exception-handling">Logging-, Error- und Exception-Handling</h3>
+
+<p>Das Logging-, Error- und Exception-Handling ist im Kapitel <a href="../quality/error-handling-policy.html">Error-Handling Policy</a> genauer beschrieben.</p>
+
+<h2 id="deployment-varianten">Deployment-Varianten</h2>
+
+<h3 id="variante-quot-einfach-quot">Variante &quot;Einfach&quot;</h3>
+
+<p><img src="resources/softwareArchitektur/deployment-einfach.png" alt=""></p>
+
+<p>Diese Variante ist eine typische Deployment-Variante einer Java-Webapplikation. Alle Layers werden gemeinsam in ein Java Webarchiv gepackt und auf einem Java Applikationsserver (Bsp. Tomcat) deployed. Dies ist die Variante, welche im Engineering-Projekt umgesetzt wurde.</p>
+
+<h3 id="variante-quot-verteilt-quot">Variante &quot;Verteilt&quot;</h3>
+
+<p><img src="resources/softwareArchitektur/deployment-verteilt.png" alt=""></p>
+
+<p>Diese Variante ist für grosse Institutionen und für online Prüfungen geeignet (nicht im Scope des Engineering-Projekts).</p>
+
+<p>Mehrere Frontend-Instanzen sind zustandslos und cachen so viel wie möglich. Auf ihnen ist nur die UI-Schicht deployed. Sie kommunizieren über REST oder RPC mit dem Service, welche den Busines-Layer und den Integration-Layer beinhaltet.</p>
+
+<p>Der Service-Layer kann theoretisch auch skaliert werden, dafür müssen aber noch Entscheide zu Datenbank- und Session-Caching getroffen werden.</p>
+
+<p>Diese Verteilung ist bereits in der Architektur vorgesehen aber noch nicht implementiert.</p>
+
+<h2 id="design-der-programmkonstrukte">Design der Programmkonstrukte</h2>
+
+<h3 id="programmkonstrukt-ui-schicht">Programmkonstrukt UI-Schicht</h3>
+
+<p>Die UI-Schicht ist nach dem Thin-Client Ansatz schlank gehalten. Es wird lediglich ein Browser benötigt, um als Client mit Examibur arbeiten zu können.</p>
+
+<h4 id="routing">Routing</h4>
+
+<p>Am Anfang jeder Interaktion steht der Request. Dieser wird durch den Browser generiert und an Spark versendet. Die in den Controller-Klassen definierten Routing-Regeln weisen den Request einer bestimmten Methode (Controller) zu. Es gewinnt jeweils die erste passende Route. Dennoch wird das gesamte Routing abgearbeitet und erst am Ende die zugewiesene Methode aufgerufen.</p>
+
+<figure>
+<img src="resources/routingOverview/routing-diagram.png">
+<figcaption>Die komplette Routing-Logik von Examibur</figcaption>
+</figure>
+
+<p><a href="http://sparkjava.com/documentation.html#routes">Spark Documentation - Routes</a></p>
+
+<h4 id="controller">Controller</h4>
+
+<p>Jeder Controller wird mit einem Request-Objekt aufgerufen, das sämtliche Informationen zum HTTP-Request, wie beispielsweise URL oder Parameter, enthält. Ausserdem wird ein initialisiertes Response-Objekt mitgegeben, über das die Rückgabe zum Client verändert werden kann.</p>
+
+<p>Als erstes werden in einem Controller die Parameter des Requests ausgewertet. Anschliessend werden über Serviceaufrufe auf den Business-Layer Datenzugriffe oder -manipulationen ausgeführt. Am Ende folgt eine Weiterleitung auf eine neue Route oder der Aufruf zur TemplateUtil, welche das Rendern eines Freemarker Templates auslöst.</p>
+
+<h4 id="exception-handling">Exception-Handling</h4>
+
+<p>Sämtliche Exceptions können im ExceptionController auf einzelne Controller gemappt werden. Sobald eine solche Exception geworfen wird, wird der Routing-Vorgang unterbrochen und die zugewiesene Methode aufgerufen.</p>
+
+<p><a href="http://sparkjava.com/documentation.html#exception-mapping">Spark Documentation - Exception Mapping</a></p>
+
+<h4 id="templates">Templates</h4>
+
+<p>Die Seitendarstellung wird wie folgt mit Freemarker umgesetzt:
+<figure>
+<img src="resources/softwareArchitektur/freemarker_overview.png">
+<figcaption>Freemarker Übersicht gemäss <a href="http://freemarker.org/"><a href="http://freemarker.org/">http://freemarker.org/</a></a></figcaption>
+</figure></p>
+
+<p>Dabei werden die ftl-Templates zusammen mit einem Model in die Freemarker-Engine gespielt und eine HTML-Datei generiert, welche an den User ausgeliefert werden kann. Dies wird über das übliche MVC-Pattern organisiert.</p>
+
+<p>Alle Templates basieren auf einem Basis-Template mit dem Namen <code>base.ftl</code>. Dadurch müssen Layout- und Strukturänderungen nur darin gemacht werden.
+Design und Layout wird über Cascading Stylesheets (CSS) gesteuert. GUI-Elemente und Styling werden von <a href="http://getbootstrap.com/">Bootstrap</a> verwendet.
+Das applikationsspezifische Styling von Examibur wird im separaten CSS-Dokument <code>custom.css</code> definiert und überschreibt die Regeln von Bootstrap automatisch.</p>
+
+<p>Für die Darstellung der Prüfungs-Auswertungen wird teilweise Javascript verwendet.</p>
+
+<h3 id="programmkonstrukt-business-schicht">Programmkonstrukt Business-Schicht</h3>
+
+<p>In der Business-Schicht ist die Geschäftslogik gekapselt.</p>
+
+<h3 id="programmkonstrukt-integration-schicht">Programmkonstrukt Integration-Schicht</h3>
+
+<p>Die Integration-Schicht bietet verschiedene Data-Access-Convenience Methoden an, welche den Zugriff auf die Datenbank bündeln und vereinfachen. Diese Methoden sind in sogenannten Data Access Objects (Dao) untergebracht.</p>
+
+<h3 id="programmkonstrukt-domain-schicht">Programmkonstrukt Domain-Schicht</h3>
+
+<p>In der Domain-Schicht sind die zu persistierenden Domain-Objekte gekapselt. Darauf wird mit EclipseLink das objektrelationale Mapping zur Datenbank definiert.</p>
+
+<h4 id="datenmodell">Datenmodell</h4>
+
+<p><img src="resources/softwareArchitektur/datamodel.png" alt=""></p>
+
+<h3 id="programmkonstrukt-datenbank-schicht">Programmkonstrukt Datenbank-Schicht</h3>
+
+<p>In der Datenbank-Schicht werden die Daten in einer relationalen Datenbank gespeichert. Als Datenbankserver wird Postgres verwendet.</p>
+
+<h2 id="zusammenspiel-der-programmkonstrukte">Zusammenspiel der Programmkonstrukte</h2>
+
+<p>In diesem Kapitel wird das Zusammenspiel der einzelnen Programmkonstrukte beschrieben. Dazu gehört auch der Zugriff auf die Datenbank. Das Zusammenspiel wird anhand von UML-Sequenzdiagrammen dargestellt.</p>
+
+<p>Zur Veranschaulichung des Zusammenspiels der Programmkonstrukte wird der Use Case &quot;UC002 Prüfung öffnen&quot; in einem Sequenzdiagram dargestellt.</p>
+
+<p><img src="resources/softwareArchitektur/zusammenspielProgrammkonstrukte.svg" alt=""></p>
+
+<p>Um eine möglichst lose Kopplung und hohe Kohäsion in Partitionen zu erreichen wird <a href="https://github.com/google/guice">Google Guice</a> eingesetzt.</p>
+
+<h3 id="zugeh-rigkeit-der-objekte-zu-den-schichten">Zugehörigkeit der Objekte zu den Schichten:</h3>
+
+<h4 id="ui-schicht">UI-Schicht</h4>
+
+<ul>
+<li>ExamController</li>
+<li>Template Renderer</li>
+</ul>
+
+<h4 id="business-schicht">Business-Schicht</h4>
+
+<ul>
+<li>Interface: ExamService</li>
+</ul>
+
+<h4 id="integration-schicht">Integration-Schicht</h4>
+
+<ul>
+<li>Interface: ExamDao</li>
+</ul>
+
+<h2 id="prozesse-amp-threads">Prozesse &amp; Threads</h2>
+
+<p>Die Architektur ist so designed, dass möglichst nie ein (globaler) Zustand herrscht (stateless). Die wohl einzige Ausnahme ist das Benutzer-Objekt (siehe nächster Absatz).</p>
+
+<p>Für jeden <a href="https://blog.krecan.net/2010/05/02/cool-tomcat-is-able-to-handle-more-than-13000-concurrent-connections/">Request wird ein Thread aufgemacht</a>, welcher synchron blockierend durchläuft. Dies bedeutet, dass ein Thread bis zur Fertigstellung (&quot;Run-to-completion&quot;) durchläuft. Derzeit sind keine asynchronen Operationen vorgesehen.</p>
+
+<p>Sowohl Controller als auch Services müssen Thread-Safe sein, denn sie werden gleichzeitig von mehreren Threads verwendet. Dies sollte meist kein Problem sein, da diese zustandslos sind. </p>
+
+<h2 id="authentisierung-authorisierung">Authentisierung / Authorisierung</h2>
+
+<p>Bei einem Request steht der aktuelle Benutzer (sofern er angemeldet ist) als <code>User</code>-Objekt den Controllern und dem Business-Layer zur Verfügung. Der Zugriff erfolgt aber unterschiedlich:</p>
+
+<p>In UI-Layer wird das Benutzer-Objekt als <a href="http://sparkjava.com/documentation#request">Attribut auf dem aktuellen Request</a> gesetzt. Da im UI-Layer das Request-Objekt an vielen Orten gebraucht wird, macht es Sinn auch gleich dort den Benutzer mitzuliefern.</p>
+
+<p>Im Business-Layer ist der aktuelle Benutzer (des aktuellen Threads) über die statische-Methode <code>AuthenticationUtil.getCurrentUser()</code> erreichbar. Die Alternative wäre, dass das Benutzer-Objekt bei jeder Service Methoden mitgegeben würde, was diese unleserlich und unnötig komplex machen würde.</p>
+
+<h2 id="korrektur-und-review">Korrektur und Review</h2>
+
+<p><img src="resources/korrekturUndReview/Korrekturmodi.png" alt=""></p>
+
+<p>Korrekturen und Reviews können direkt bei der jeweiligen Aufgabenlösung (ExerciseSolution) erstellt werden. Um den Korrekturvorgang zu erleichtern, gibt es zwei verschiedene Modi, um durch die Aufgabenlösungen zu gehen: Aufgabenweise (erste Zeile in der Abbildung) und Prüfungsweise (zweite Zeile in der Abbildung). Weiter wird unterschieden, ob die Korrektur nach einem Durchgang abbricht oder mit dem nächsthöheren Element fortgesetzt wird (Spalte 2 und 3 der Abbildung).</p>
+
+<p>Während des Korrekturvorgangs wird der URL ein Query-Parameter <code>browse</code> angefügt. Der Wert des Parameters bestimmt den Modus: <code>exercise</code> (oben Mitte), <code>exercises</code> (oben rechts), <code>participation</code> (unten Mitte), <code>participations</code> (unten rechts).</p>
+
+
+        <hr>
+
+        <footer>
+            <p>&copy; 2017 Jonas Matter, Patrick Scherler, Robin Suter, Raphael Zimmermann</p>
+        </footer>
+    </div>
+</body>
+
+</html>

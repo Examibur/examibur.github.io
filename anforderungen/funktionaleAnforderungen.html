@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Examibur - Funktionale Anforderungen</title>
+
+    
+    
+    
+
+        <link href="../website/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../website/css/custom.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="..">
+            <img src="../website/images/logo-white-transparent-rotated.png">
+            Examibur
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+        <a href="../index.html">
+            <div class="container">
+                <h1>Funktionale Anforderungen</h1>
+            </div>
+        </a>
+        </a>
+    </div>
+
+    <div class="container">
+        <h1 id="einf-hrung">Einführung</h1>
+
+<h2 id="zweck">Zweck</h2>
+
+<p>Dieses Dokument beschreibt die Anforderungsspezifikation. Es wird der Fokus auf die funktionalen Anforderungen gelegt. Es ist ersichtlich, welche Use Cases Scope des Engineering-Projekts sind und welche Use Cases für Folgeprojekte vorgesehen sind. Desweiteren werden die Stakeholders analysiert und ihre Ansprüche mit User Stories identifiziert. Aus Gründen der Übersichtlichkeit sind die nicht-funktionalen Anforderungen in einem <a href="nichtFunktionaleAnforderungen.html">separaten Dokument</a> beschrieben.</p>
+
+<h2 id="g-ltigkeitsbereich">Gültigkeitsbereich</h2>
+
+<p>Der Gültigkeitsbereich beschränkt sich auf die Projektdauer vom 20.02.17 bis 02.06.17. Während dieser Zeit wird das Dokument laufend aktualisiert und stellt zu jedem Zeitpunkt einen genauen Überblick über die funktionalen Anforderungen zur Verfügung.</p>
+
+<h2 id="referenzen">Referenzen</h2>
+
+<p>In der nachfolgenden Tabelle sind alle Dokumente und Links aufgelistet, welche für die funktionalen Anforderungen von Relevanz sind. Diese Liste wird laufend auf dem aktuellen Stand gehalten.</p>
+
+<table><thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><strong>Referenz</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nicht-funktionale Anforderungen</td>
+<td><a href="nichtFunktionaleAnforderungen.html">nicht-funktionale Anforderungen </a></td>
+</tr>
+<tr>
+<td>Software Architektur</td>
+<td><a href="../architektur/softwareArchitektur.html">Software Architektur</a></td>
+</tr>
+<tr>
+<td>Produkt &amp; Vision</td>
+<td><a href="../projektplan/projektplan.html">Projektplan</a></td>
+</tr>
+<tr>
+<td>Personas</td>
+<td><a href="personas.html">Personas</a></td>
+</tr>
+</tbody></table>
+
+<h1 id="allgemeine-beschreibung">Allgemeine Beschreibung</h1>
+
+<h2 id="produkt-amp-vision">Produkt &amp; Vision</h2>
+
+<p>Produkt &amp; Vision können dem <a href="../projektplan/projektplan.html">Projektplan</a> im Kapitel Projekt Übersicht entnommen werden.</p>
+
+<h2 id="zielgruppe">Zielgruppe</h2>
+
+<p>Die Zielgruppen des Projekts sind im Dokument <a href="personas.html">Personas</a> genauer beschrieben.</p>
+
+<h2 id="abh-ngigkeiten">Abhängigkeiten</h2>
+
+<p>Die Nutzung von Examibur setzt einen aktuellen Webbrowser mit einer funktionierenden Internetverbindung voraus.</p>
+
+<p>Examibur verwendet diverse Bibliotheken, Frameworks und Produkte, welche sich in der Praxis bewährt haben (<a href="../architektur/softwareArchitektur.html">siehe Software Architektur</a>).</p>
+
+<h1 id="funktionale-anforderungen">Funktionale Anforderungen</h1>
+
+<p>Im folgenden sind die funktionalen Anforderungen anhand von Use Cases beschrieben. Es wird besonderen Wert auf die Aktoren und Stakeholder gelegt, um die Bedürfnisse der verschiedenen Anspruchsgrupppen an das Produkt zu identifizieren. Die Use Cases, welche im Scope des Projekts sind, sind im Fully-Dressed-Format aufgelistet. Use Cases für allfällige Folgeprojekte werden im Brief-Format spezifiziert.</p>
+
+<h2 id="einschr-nkungen">Einschränkungen</h2>
+
+<p>Die Beschreibung der folgenden Kapitel wurde basierend auf der Vision von Examibur erfasst. Im Unterkapitel Use Cases ist klar ersichtlich, welche Funktionalität Scope des Projekts Examibur ist. Um die Applikation offen für Folgeprojekte zu halten, wurden die anderen Anforderungen zusätzlich spezifiziert (Kapitel Erweiterungen), um sich keine Hindernisse einzubauen, welche eine allfällige Erweiterung erschweren könnten.</p>
+
+<h2 id="aktoren">Aktoren</h2>
+
+<table><thead>
+<tr>
+<th>Aktor</th>
+<th>Beschreibung</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Korrektor</strong></td>
+<td>Ein Korrektor erstellt und verwaltet Prüfungen. Nach der Durchführung einer Prüfung hat er die Möglichkeit, die Prüfungen mit einem Scanner in das System einzulesen. Sobald die Prüfungen im System erfasst bzw. eingelesen wurden, kann er gleiche Prüfungsaufgaben einzeln durchgehen und korrigieren. Der Korrektor kann auch eine Prüfung eines einzelnen Studenten am Stück korrigieren. Sind alle Aufgaben korrigiert, kann die Prüfung in den Reviewprozess überführt werden. Aufgabenbewertungen, welche vom Reviewer zurückgewiesen werden, müssen überarbeitet werden, bevor die Prüfung in den Status <u>korrigiert</u> überführt werden kann.</td>
+</tr>
+<tr>
+<td><strong>Reviewer</strong></td>
+<td>Sobald der Korrektor eine Prüfung einem Reviewer zuordnet, kann dieser Aufgabe für Aufgabe durchgehen und die Aufgabenwertungen des Korrektors überprüfen. Er kann sie entweder akzeptieren oder per Kommentar an den Korrektor zurückweisen.</td>
+</tr>
+<tr>
+<td><strong>Verwaltung</strong></td>
+<td>Die Verwaltung der Lehranstalt erstellt initiale Prüfungen mit allen Terminen und weist diese den Korrektoren zur Erstellung der Prüfung zu. Die Verwaltung kann den Status der einzelnen Prüfung einsehen und hat die Möglichkeit die korrigierten Prüfungen nach Abschluss der Reviewphase einzusehen und bei Bedarf zu exportieren. Falls ein Student den Rekursprozess startet, übernimmt die Verwaltung die Verarbeitung dieses Rekurses.</td>
+</tr>
+<tr>
+<td><strong>Student</strong></td>
+<td>Der Student hat die Möglichkeit die korrigierte Prüfung nach Freischaltung der Noten einzusehen und bei Bedarf den Rekursprozess anzustossen.</td>
+</tr>
+</tbody></table>
+
+<h2 id="stakeholder">Stakeholder</h2>
+
+<p>Die Ansprüche der Stakeholder werden als User Stories erfasst, um so den Sinn und Zweck von Examibur und den Mehrwert für alle Stakeholder aufzuzeigen.</p>
+
+<h3 id="lehranstalt">Lehranstalt</h3>
+
+<h4 id="us101-qualit-tssicherung"><u>US101: Qualitätssicherung</u></h4>
+
+<p>Als Lehranstalt möchte ich die Qualität der Prüfungskorrekturen hochhalten, um Rekurskosten zu sparen.</p>
+
+<h4 id="us102-rekurszprozess"><u>US102: Rekurszprozess</u></h4>
+
+<p>Als Lehranstalt möchte ich den Rekursprozess abgebildet haben, um so die rechtlichen Vorgaben einhalten zu können.</p>
+
+<h3 id="dozent">Dozent</h3>
+
+<h4 id="us201-pr-fung-erstellen"><u>US201: Prüfung erstellen</u></h4>
+
+<p>Als Dozent möchte ich Prüfungen online erstellen können, um so eine einfache, zentrale und für Nachfolge transparente Ablage der Prüfung zu erreichen.</p>
+
+<h4 id="us202-qualit-t-aufrechterhalten"><u>US202: Qualität aufrechterhalten</u></h4>
+
+<p>Als Dozent möchte ich Prüfungskorrekturen reviewen lassen, um so die Qualität und Fairness der Bewertungen aufrecht zu erhalten und allfällige Flüchtigkeitsfehler zu vermeiden.</p>
+
+<h4 id="us203-pr-fung-online-korrigieren"><u>US203: Prüfung online korrigieren</u></h4>
+
+<p>Als Dozent möchte ich Prüfungen online korrigieren, um so den Papierkrieg einzudämmen, Verluste vorzubeugen und Transparenz zu gewährleisten.</p>
+
+<h3 id="student">Student</h3>
+
+<h4 id="us301-anonyme-korrektur"><u>US301: anonyme Korrektur</u></h4>
+
+<p>Als Student möchte ich eine anonyme Korrektur der Prüfung erhalten, um so eine faire Beurteilung meiner Leistung sicherzustellen.</p>
+
+<h4 id="us302-pr-fungsreview"><u>US302: Prüfungsreview</u></h4>
+
+<p>Als Student möchte ich eine zweite Beurteilung der Korrektur nach dem 4-Augen-Prinzip, um so die Qualität der Korrekturen hoch und fair zu halten.</p>
+
+<h4 id="us303-pr-fungseinsicht"><u>US303: Prüfungseinsicht</u></h4>
+
+<p>Als Student möchte ich die Prüfung inklusive Korrektur nach Freischaltung der Noten einsehen, um so das Zustandekommen der Note zu verstehen und um Wissenslücken am Ende des Moduls zu identifizieren.</p>
+
+<h4 id="us304-rekursprozess"><u>US304: Rekursprozess</u></h4>
+
+<p>Als Student möchte ich den Rekursprozess bei Ungereimtheiten anstossen, um so alle Fristen und Bedingungen für einen gültigen Rekurs einhalten zu können.</p>
+
+<h2 id="use-cases">Use Cases</h2>
+
+<h3 id="diagramm">Diagramm</h3>
+
+<p><img src="resources/UseCaseDiagram.svg" alt=""></p>
+
+<h3 id="beschreibung">Beschreibung</h3>
+
+<p>Im folgenden sind alle Use Cases im Fully-Dressed-Format aufgelistet, welche Teil des Scopes des Projekts sind.</p>
+
+<h4 id="uc001-pr-fungen-anzeigen"><u>UC001: Prüfungen anzeigen</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor, Reviewer, Verwaltung</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will alle Prüfungen sehen, welche ihm zugewiesen sind, um Korrekturen durchführen zu können.</li>
+<li><u>Reviewer</u> will alle Prüfungen sehen, welche ihm zum Review zugewiesen sind, um den Review durchführen zu können.</li>
+<li><u>Verwaltung</u> will alle Prüfungen sehen, um Metadaten (Durchführungsdatum, etc.) bearbeiten und um Notenexporte durchführen zu können.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Dem <u>Korrektor</u> werden seine zugewiesene Prüfungen angezeigt.</li>
+<li>Dem <u>Reviewer</u> werden zum Review zugewiesene Prüfungen angezeigt.</li>
+<li>Der <u>Verwaltung</u> werden alle Prüfungen angezeigt.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User öffnet die Übersicht/Dashboard.</li>
+<li>Das System lädt alle relevanten Prüfungen.</li>
+</ol>
+
+<h4 id="uc002-pr-fung-ffnen"><u>UC002: Prüfung öffnen</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor, Reviewer, Verwaltung</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will eine Prüfung öffnen, um Prüfungsdurchführungen korrigieren zu können.</li>
+<li><u>Reviewer</u> will eine Prüfung öffnen, um den Review der Korrektur durchführen zu können.</li>
+<li><u>Verwaltung</u> will eine Prüfung öffnen, um Prüfungsteilnahmen an <u>Studenten</u> freigeben zu können.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und befindet sich auf der Übersicht/Dashboard.</li>
+<li>Die Prüfung ist dem User zugewiesen.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Dem User wird die Prüfung zur weiteren Verarbeitung (Korrektur, Review, Export, Auswertung) angezeigt.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User wählt aus der Prüfungsliste eine Prüfung aus.</li>
+<li>Das System lädt die Prüfung.</li>
+</ol>
+
+<p><strong>Level:</strong></p>
+
+<p>include:</p>
+
+<ul>
+<li>UC003</li>
+<li>UC004</li>
+<li>UC018</li>
+</ul>
+
+<h4 id="uc003-pr-fungsteilnahmen-anzeigen"><u>UC003: Prüfungsteilnahmen anzeigen</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor, Reviewer, Verwaltung</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will alle Prüfungsteilnahmen sehen, um Prüfungsteilnahmen einzeln korrigieren zu können.</li>
+<li><u>Reviewer</u> will alle Prüfungsteilnahmen sehen, um Prüfungsteilnahmen einzeln reviewen zu können.</li>
+<li><u>Verwaltung</u> will alle Prüfungsteilnahmen sehen, um Prüfungsteilnahmen an Studenten freigeben und um Notenexporte über alle Prüfungsteilnahmen durchführen zu können.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und hat eine Prüfung geöffnet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Dem User werden alle Prüfungsteilnahmen zur Prüfung angezeigt.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Das System lädt alle Prüfungsteilnahmen.</li>
+</ol>
+
+<h4 id="uc004-pr-fungsaufgaben-anzeigen"><u>UC004: Prüfungsaufgaben anzeigen</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor, Reviewer</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will alle Prüfungsaufgaben sehen, um alle Lösungen zu einer Prüfungsaufgaben korrigieren zu können.</li>
+<li><u>Reviewer</u> will alle Prüfungsaufgaben sehen, um alle Bewertungen zu einer Prüfungsaufgabe reviewen zu können.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und hat eine Prüfung geöffnet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Dem User werden alle Prüfungsaufgaben zur Prüfung angezeigt.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Das System lädt alle Prüfungsaufgaben.</li>
+</ol>
+
+<h4 id="uc005-pr-fungsteilnahme-korrigieren"><u>UC005: Prüfungsteilnahme korrigieren</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will eine Prüfungsteilnahme eines Studenten Aufgabe für Aufgabe korrigieren.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und hat die Prüfung geöffnet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Dem User wurden alle gelöste Aufgaben eines Prüfungsteilnehmers zur Korrektur angezeigt, welche vom User korrigiert wurden.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User wählt aus der Liste aller Prüfungsteilnahmen eine aus und öffnet sie.</li>
+<li>UC007 durchführen.
+Wiederhole 2 bis alle Aufgaben korrigiert sind</li>
+</ol>
+
+<p><strong>Level:</strong></p>
+
+<p>include:</p>
+
+<ul>
+<li>UC007</li>
+</ul>
+
+<h4 id="uc006-pr-fungsaufgabe-korrigieren"><u>UC006: Prüfungsaufgabe korrigieren</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will alle Lösungen aller Teilnehmer einer Aufgabe korrigieren.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und hat die Prüfung geöffnet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Dem User wurden alle gelöste Aufgaben einer Aufgabe aller Prüfungsteilnehmer zur Korrektur angezeigt, welche vom User korrigiert wurden.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User wählt aus der Liste aller Prüfungsaufgaben eine aus und öffnet sie.</li>
+<li>UC007 durchführen.
+Wiederhole 2 bis alle Aufgaben korrigiert sind</li>
+</ol>
+
+<p><strong>Level:</strong></p>
+
+<p>include:</p>
+
+<ul>
+<li>UC007</li>
+</ul>
+
+<h4 id="uc007-aufgabe-korrigieren"><u>UC007: Aufgabe korrigieren</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will eine gelöste Prüfungsaufgabe eines Teilnehmers korrigieren.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und kommt über UC005 oder UC006.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Der User hat die Aufgabe korrigiert.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Das System lädt die Aufgabe.</li>
+<li>Der User korrigiert die Aufgabe, fügt einen Kommentar hinzu, bewertet sie und drückt auf nächste Aufgabe korrigieren.</li>
+</ol>
+
+<h4 id="uc008-pr-fung-f-r-review-freigeben"><u>UC008: Prüfung für Review freigeben</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will nach der Korrektur die Prüfung für den Review freigeben.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und hat alle Prüfungsteilnahmen korrigiert.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Die Prüfung wurde einem <u>Reviewer</u> zum Review freigegeben.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User drückt auf zum Review freigeben und wählt den Reviewer aus.</li>
+<li>Das System weist dem <u>Reviewer</u> die Prüfung zum reviewen zu.</li>
+</ol>
+
+<h4 id="uc009-review-abarbeiten"><u>UC009: Review abarbeiten</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will nach dem Review der Prüfung die Beanstandungen durchgehen.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet.</li>
+<li>Der <u>Reviewer</u> hat während dem Review eine Beurteilung beanstandet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Alle Beanstandungen des <u>Reviewer</u> wurden durch den <u>Korrektor</u> angenommen und umgesetzt oder verworfen.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User drückt auf zum Review abarbeiten.</li>
+<li>Das System lädt die n-te Beanstandung.</li>
+<li>Der User nimmt die Beanstandung an und korregiert die Bewertung oder verwirft sie.
+Wiederhole 2 bis 3 bis alle Beanstandungen abgearbeitet sind.</li>
+</ol>
+
+<h4 id="uc011-pr-fungsteilnahme-reviewen"><u>UC011: Prüfungsteilnahme reviewen</u></h4>
+
+<p><strong>Primary Actor:</strong> Reviewer</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Reviewer</u> will alle Bewertungen einer Prüfungsteilnahme reviewen.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und hat die Prüfung geöffnet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Dem User wurden alle bewerteten Aufgaben aller Prüfungsteilnehmer zur Korrektur angezeigt, welche vom User gereviewt wurden.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User wählt aus der Liste aller Prüfungsteilnahmen eine aus und öffnet sie.</li>
+<li>UC013 durchführen.
+Wiederhole 2 bis alle Aufgaben korrigiert sind</li>
+</ol>
+
+<p><strong>Level:</strong></p>
+
+<p>include:</p>
+
+<ul>
+<li>UC013</li>
+</ul>
+
+<h4 id="uc012-pr-fungsaufgabe-reviewen"><u>UC012: Prüfungsaufgabe reviewen</u></h4>
+
+<p><strong>Primary Actor:</strong> Reviewer</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Reviewer</u> will alle Bewertungen aller Teilnehmer einer Aufgabe reviewen.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und hat die Prüfung geöffnet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Dem User wurden alle bewerteten Aufgaben einer Aufgabe aller Prüfungsteilnehmer zum Review angezeigt, welche vom User reviewt wurden.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User wählt aus der Liste aller Prüfungsaufgaben eine aus und öffnet sie.</li>
+<li>UC013 durchführen.
+Wiederhole 2 bis alle Aufgaben korrigiert sind</li>
+</ol>
+
+<p><strong>Level:</strong></p>
+
+<p>include:</p>
+
+<ul>
+<li>UC013</li>
+</ul>
+
+<h4 id="uc013-aufgabe-reviewen"><u>UC013: Aufgabe reviewen</u></h4>
+
+<p><strong>Primary Actor:</strong> Reviewer</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Reviewer</u> will eine bewertete Prüfungsaufgabe eines Teilnehmers reviewen.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und kommt über UC011 oder UC012.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Der User hat die Aufgabe gereviewt.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Das System lädt die Aufgabe.</li>
+<li>Der User reviewt die Aufgabe, akzeptiert oder lehnt die Bewertung ab und fügt optional einen Kommentar hinzu.</li>
+</ol>
+
+<h4 id="uc014-review-abschliessen"><u>UC014: Review abschliessen</u></h4>
+
+<p><strong>Primary Actor:</strong> Reviewer</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Reviewer</u> will nach der Durchführung des Reviews die Prüfung dem <u>Korrektor</u> zur Überarbeitung oder zum Abschluss geben.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und hat einen Review aller Aufgaben durchgeführt.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Dem <u>Korrektor</u> wurde die Prüfung zur Überarbeitung oder zum Abschluss zugewiesen.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User drückt auf Review abschliessen.</li>
+<li>Das System weist der Prüfung den Status basierend auf dem Review-Ergebnis zu.</li>
+</ol>
+
+<p><strong>Extension:</strong></p>
+
+<ol start=2>
+  <li>
+    <ol type="a">
+      <li>Wenn alle Aufgaben akzeptiert wurden, erhält die Prüfung den Status `appeal`</li>
+      <li>Wenn eine oder mehrere Aufgaben zurückgewiesen wurden, erhält die Prüfung den Status `approval`</li>
+    </ol>
+  </li>
+</ol>
+
+<h4 id="uc016-pr-fungskorrektur-abschliessen"><u>UC016: Prüfungskorrektur abschliessen</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will nach Erhalt und Bearbeitung des Reviews die Prüfung abschliessen und für die Notenfreigabe freigeben.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System eingeloggt, der <u>Reviewer</u> hat UC014 durchgeführt und alle Beanstandungen des <u>Reviewers</u> wurden überarbeitet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Der User hat die Prüfung für die Notenfreigabe freigeben.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User drückt auf Korrektur abschliessen.</li>
+<li>Das System setzt den Status der Prüfung auf <code>appeal</code>.</li>
+</ol>
+
+<h4 id="uc017-notenskala-festlegen"><u>UC017: Notenskala festlegen</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will die Notenskala der Prüfung festlegen.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System eingeloggt und hat eine Prüfung geöffnet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Die Notenskale der Prüfung wurde gesetzt/bearbeitet.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User ändert die Notenskala der Prüfung.</li>
+<li>Das System setzt den neuen Wert.</li>
+</ol>
+
+<h4 id="uc018-pr-fung-auswerten"><u>UC018: Prüfung auswerten</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will eine Prüfung auswerten, um Notendurchschnitt und -median zu sehen.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und hat eine Prüfung geöffnet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Dem User wird eine Auswertung (Notendurchschnitt und -median) über die Prüfung angezeigt.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Das System generiert die Auswertung.</li>
+</ol>
+
+<h4 id="uc023-pr-fung-auf-modulebene-auswerten"><u>UC023: Prüfung auf Modulebene auswerten</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will eine Prüfung auf Modulebene mit vorherigen Durchführungen vergleichen, um zu sehen, ob Änderungen an der Moduldurchführung die Qualität des Unterrichts verbessert haben.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet und hat eine Prüfung geöffnet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Dem User wird eine Auswertung auf Modulebene über vorherigen Durchführungen angezeigt. Es ist ersichtlich, wie sich der Notendurchschnitt verändert hat.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User drückt auf mit vorherigen Durchführungen vergleichen.</li>
+<li>Das System generiert die Auswertung.</li>
+</ol>
+
+<h4 id="uc019-todo-39-s-anzeigen"><u>UC019: ToDo&#39;s anzeigen</u></h4>
+
+<p><strong>Primary Actor:</strong> Korrektor, Reviewer</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Korrektor</u> will auf der Übersicht/Dashboard eine Liste mit allen Prüfungen, welche korrigiert werden müssen, oder deren Korrektur nach dem Review eine Überarbeitung erfodern.</li>
+<li><u>Reviewer</u> will auf der Übersicht/Dashboard eine Liste mit allen Prüfungen, welche gereviewt werden müssen.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User ist im System angemeldet.</li>
+</ul>
+
+<p><strong>Postconditions:</strong></p>
+
+<ul>
+<li>Dem User werden alle relevanten Prüfungen angezeigt, welche noch eine Aktion erfordern.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User öffnet die Übersicht/Dashboard.</li>
+<li>Das System lädt alle offenen Prüfungen, welche für den User relevant sind.</li>
+</ol>
+
+<h4 id="uc022-online-pr-fungseinsicht-f-r-studenten"><u>UC022: online Prüfungseinsicht für Studenten</u></h4>
+
+<p><strong>Primary Actor:</strong> Student</p>
+
+<p><strong>Stakeholders and Interests:</strong></p>
+
+<ul>
+<li><u>Student</u> will seine Prüfung einsehen.</li>
+</ul>
+
+<p><strong>Preconditions:</strong></p>
+
+<ul>
+<li>Der User hat eine Prüfung geschrieben, welche im Status <code>appeal</code> ist.</li>
+</ul>
+
+<p><strong>Main Success Scenario:</strong></p>
+
+<ol>
+<li>Der User öffnet die gewünschte Prüfung.</li>
+<li>Das System zeigt dem User die 1. Aufgabe inklusiv Bewertung an.</li>
+<li>Der User kann zur nächsten Aufgabe navigieren.
+Wiederhole bis alle Aufgaben durchnavigiert sind.</li>
+</ol>
+
+<h2 id="erweiterungen">Erweiterungen</h2>
+
+<p>Nachfolgend werden Use Cases kurz aufgelistet, welche das Projekt in seiner Funktionalität vervollständigen würden, um die angestrebte Vision zu erreichen.
+Diese Use Cases sind nicht Teil des Scopes und werden bei Bedarf und freier Zeit eingeplant und umgesetzt.
+Grundsätzlich sollen sie eine Übersicht für Folgeprojekte bieten und aufzeigen, was alles noch möglich wäre.</p>
+
+<h3 id="diagramm">Diagramm</h3>
+
+<p><img src="resources/UseCaseDiagramErweiterung.svg" alt=""></p>
+
+<h3 id="beschreibung">Beschreibung</h3>
+
+<h4 id="uc101-login-durchf-hren"><u>UC101: Login durchführen</u></h4>
+
+<p>Es soll möglich sein, dass sich User mit ihren HSR-Logindaten (Adunis, Moodle) einloggen können.</p>
+
+<h4 id="uc102-crud-pr-fung"><u>UC102: CRUD Prüfung</u></h4>
+
+<p>Die <u>Verwaltung</u> erstellt initiale Prüfungen mit allen Daten (Durchführungsdatum, etc.) und weist die Prüfung einem <u>Korrektor</u> zu.
+Dieser <u>Korrektor</u> erfasst die Prüfungsaufgaben online. Die Prüfung lässt sich für die Durchführung ausdrucken.</p>
+
+<h4 id="uc103-pr-fung-scannen"><u>UC103: Prüfung scannen</u></h4>
+
+<p>Nach der Durchführung der Prüfung kann die <u>Verwaltung</u> oder der <u>Korrektor</u> die Prüfung scannen.
+Dabei wird UC104 und UC105 durchgeführt.</p>
+
+<h4 id="uc104-pr-fungsaufgaben-aufsplitten"><u>UC104: Prüfungsaufgaben aufsplitten</u></h4>
+
+<p>Die einglesenen Prüfungsaufgaben werden in einzelne Teilaufgaben aufgesplittet und so ins System gespielt, damit bei der Korrektur einzelne Aufgaben durchkorrigiert werden können.</p>
+
+<h4 id="uc105-multiple-choice-aufgaben-automatisch-auswerten"><u>UC105: Multiple-Choice-Aufgaben automatisch auswerten</u></h4>
+
+<p>Multiple-Choice-Aufgaben werden vom System automatisch erkannt und ausgewertet.</p>
+
+<h4 id="uc106-crud-korrektor"><u>UC106: CRUD Korrektor</u></h4>
+
+<p>Es soll möglich sein, <u>Korrektoren</u> zu verwalten.</p>
+
+<h4 id="uc107-crud-verwaltung"><u>UC107: CRUD Verwaltung</u></h4>
+
+<p>Es soll möglich sein, die <u>Verwaltung</u> zu verwalten.</p>
+
+<h4 id="uc108-crud-reviewer"><u>UC108: CRUD Reviewer</u></h4>
+
+<p>Es soll möglich sein, die <u>Reviewer</u> zu verwalten.</p>
+
+<h4 id="uc108-crud-student"><u>UC108: CRUD Student</u></h4>
+
+<p>Es soll möglich sein, die <u>Studenten</u> zu verwalten.</p>
+
+<h4 id="uc109-crud-benutzerrolle"><u>UC109: CRUD Benutzerrolle</u></h4>
+
+<p>Es soll möglich sein, die Benutzerrollen zu verwalten.</p>
+
+<h4 id="uc110-rekurs-durchf-hren"><u>UC110: Rekurs durchführen</u></h4>
+
+<p>Den <u>Studenten</u> soll die Möglichkeit geboten werden, Rekurse anzustossen und durch den Rekursprozess geführt zu werden.</p>
+
+<h4 id="uc111-rekurs-verwalten"><u>UC111: Rekurs verwalten</u></h4>
+
+<p>Die <u>Verwaltung</u> hat die Möglichkeit laufende Rekurse zu verwalten.</p>
+
+<h4 id="uc112-aktion-loggen"><u>UC112: Aktion loggen</u></h4>
+
+<p>Das System soll eine Historie über Änderungen an der Prüfung, Korrektur, Reviews und Rekursen erstellen.</p>
+
+<h4 id="uc113-notenexport-durchf-hren"><u>UC113: Notenexport durchführen</u></h4>
+
+<p>Es soll möglich sein, einen Export im csv-Format mit den Daten (Student, Matrikel-Nr, erreichte Punktzahl, totale Punktzahl, Note) zu generieren.</p>
+
+
+        <hr>
+
+        <footer>
+            <p>&copy; 2017 Jonas Matter, Patrick Scherler, Robin Suter, Raphael Zimmermann</p>
+        </footer>
+    </div>
+</body>
+
+</html>

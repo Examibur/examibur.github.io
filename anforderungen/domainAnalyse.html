@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Examibur - Domain Analyse</title>
+
+    
+    
+    
+
+        <link href="../website/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../website/css/custom.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="..">
+            <img src="../website/images/logo-white-transparent-rotated.png">
+            Examibur
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+        <a href="../index.html">
+            <div class="container">
+                <h1>Domain Analyse</h1>
+            </div>
+        </a>
+        </a>
+    </div>
+
+    <div class="container">
+        <h1 id="einf-hrung">Einführung</h1>
+
+<h2 id="zweck">Zweck</h2>
+
+<p>Dieses Dokument beschreibt die Domain-Analyse. Es dokumentiert das Domain Model anhand der Problem-Domain und ergänzt es mit Erläuterungen. Ausserdem wird der Prozess einer Prüfung von der Korrektur bis zur Archivierung beschrieben.</p>
+
+<h2 id="g-ltigkeitsbereich">Gültigkeitsbereich</h2>
+
+<p>Der Gültigkeitsbereich beschränkt sich auf die Projektdauer vom 20.02.17 bis 02.06.17. Während dieser Zeit wird das Dokument laufend aktualisiert und stellt zu jedem Zeitpunkt einen Überblick über die Problem-Domain zur Verfügung.</p>
+
+<h2 id="referenzen">Referenzen</h2>
+
+<p>In der nachfolgenden Tabelle sind alle Dokumente und Links aufgelistet, welche für die Domain-Analyse von Relevanz sind. Diese Liste wird laufend auf dem aktuellen Stand gehalten.</p>
+
+<table><thead>
+<tr>
+<th><strong>Name</strong></th>
+<th><strong>Referenz</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Funktionale Anforderungen</td>
+<td><a href="funktionaleAnforderungen.html">Funktionale Anforderungen </a></td>
+</tr>
+<tr>
+<td>Nicht-funktionale Anforderungen</td>
+<td><a href="nichtFunktionaleAnforderungen.html">Nicht-funktionale Anforderungen</a></td>
+</tr>
+</tbody></table>
+
+<h1 id="domain-model-uml">Domain Model UML</h1>
+
+<p><img src="resources/domainmodel.png" alt=""></p>
+
+<h2 id="erl-uterungen">Erläuterungen</h2>
+
+<ul>
+<li>Unter <code>Exam</code> versteht man eine Prüfungsdurchführung, für die es eine oder mehrere gelöste Prüfungen der Prüfungsteilnehmer gibt.</li>
+<li>Eine Prüfungsteilnahme (<code>ExerciseParticipation</code>) ist eine gelöste Prüfung eines Prüfungsteilnehmers.</li>
+<li>Zu jeder gelösten Aufgabenstellung <code>ExerciseSolution</code> können mehrere Korrekturen (<code>ExerciseGrading</code>) erstellt werden. Jede Aufgabe wird einem Korrektor und einem Reviewer zugeordnet. Zur Korrektur/Review kann ein Grund angegeben werden, der nur intern sichtbar ist (während der Kommentar auch dem Teilnehmer gezeigt wird). Am Schluss entscheidet der Korrektor, welche Punktzahl der Aufgabe die endgültige Bewertung ist (<em>final grading</em>). Bei jeder Aufgabenkorrektur wird mitgespeichert, in welcher Phase der Prüfungskorrektur (z.B. <code>Correction</code>, <code>Review</code>) und von wem diese vorgenommen wurde.</li>
+<li>Die Lösungen einer Prüfungsaufgabe können von verschiedenen Subtypen von <code>Solution</code> sein. Eine Prüfungsaufgabe hat genau eine Musterlösung. Diese muss vom gleichen (Sub-)Typ sein, wie die Lösungen der Prüfungsteilnehmer.</li>
+<li>Das Flag <code>isDone</code> bei einer Aufgabenlösung (<code>ExerciseSolution</code>) wird bei jeder Phase des Prozesses neu gesetzt. In der Korrektur-Phase zum Beispiel zeigt es an, ob die Aufgabe bereits korrigiert wurde, während es in der Approval-Phase signalisiert, ob es einen Einwand des Reviewers gibt und dieser vom Korrektor bearbeitet werden muss. Aufgrund dieses Felds werden die &quot;ToDo&#39;s&quot; erstellt.</li>
+</ul>
+
+<h1 id="korrektur-prozess">Korrektur-Prozess</h1>
+
+<p><img src="resources/exam_states.svg" alt=""></p>
+
+<p>Eine Prüfung durchläuft während der Korrektur verschiedene Zustände. Nach dem Import der Prüfungsdaten ist eine Prüfung in der Korrekturphase. Hier müssen alle Aufgaben korrigiert werden.</p>
+
+<p>Sind alle Aufgaben korrigiert, so kann die Prüfung manuell in den nächsten Zustand, Review, überführt werden. Diese Phase läuft analog zur Korrektur ab, wobei der Reviewer bestehende Korrekturen anpassen und kommentieren kann.</p>
+
+<p>Ist ein Review abgeschlossen (manueller Schritt), so muss der Korrektor diese Reviews wiederum annehmen oder ablehnen. Diese Phase nennt sich Approval. Aufgaben, welche im Review weder kommentiert noch korrigiert wurden, sind automatisch approved.</p>
+
+<p>Sind alle Aufgaben approved, wird die Prüfung manuell in den Zustand appeal gesetzt. In dieser Phase verweilt eine Prüfung solange, bis die Rekursfrist abgelaufen oder ein allfälliger Rekurs abgeschlossen ist. Anschliessend wird eine Prüfung automatisch archiviert.</p>
+
+<h2 id="unterst-tzte-aufgabentypen">Unterstützte Aufgabentypen</h2>
+
+<p>In einer ersten Phase unterstützen wir nur Textaufgaben. Diese haben eine textuelle Beschreibung und Antwort. In einer zweiten Phase (bei genügend Zeit oder nicht mehr im Rahmen des Engineering-Projekts) kommt der Aufgabentyp Multiple-Choice hinzu. Potentielle weitere Aufgabentypen (Bsp. mit Bildern oder Programmieraufgaben) müssen mit den Dozenten abgeklärt werden.</p>
+
+
+        <hr>
+
+        <footer>
+            <p>&copy; 2017 Jonas Matter, Patrick Scherler, Robin Suter, Raphael Zimmermann</p>
+        </footer>
+    </div>
+</body>
+
+</html>

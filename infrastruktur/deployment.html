@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Examibur - Deployment Projektserver</title>
+
+    
+    
+    
+
+        <link href="../website/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../website/css/custom.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="..">
+            <img src="../website/images/logo-white-transparent-rotated.png">
+            Examibur
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+        <a href="../index.html">
+            <div class="container">
+                <h1>Deployment Projektserver</h1>
+            </div>
+        </a>
+        </a>
+    </div>
+
+    <div class="container">
+        <h2 id="kennw-rter-amp-keys">Kennwörter &amp; Keys</h2>
+
+<p>Alle verwendeten Kennwörter &amp; Keys sind bei Raphael Zimmermann und Robin Suter abgelegt.</p>
+
+<h2 id="installation-projekeserver">Installation Projekeserver</h2>
+
+<p>Als erstes die IP im DNS eintragen (hier <code>sonar.raphael.li</code> und <code>examibur-demo.raphael.li</code>)</p>
+
+<p>Als Ausgangslage dient ein minimaler Ubuntu-Server mit einem OpenSSH-Daemon.</p>
+
+<p><a href="https://docs.docker.com/engine/installation/linux/ubuntu/">Docker CE</a> und <a href="https://docs.docker.com/compose/install/">Docker Compose</a> installieren. Anschliessend Docker-Autostart aktivieren</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">systemctl <span class="nb">enable </span>docker.service
+systemctl start docker.service
+</code></pre></div>
+<p>Notwendige Software installieren</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install inotify-tools
+</code></pre></div>
+<p>Zwei frische SSH-Keys generieren. Dies muss auf einem vertrauenswürdigen System passieren</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Key for git access</span>
+ssh-keygen -t rsa -b 4096 -C <span class="s1">'examibur-projekteserver-git'</span> -f git
+<span class="c"># Key for SSH-Deployment</span>
+ssh-keygen -t rsa -b 4096 -C <span class="s1">'examibur-projekteserver-ssh'</span> -f ssh
+</code></pre></div>
+<p>In Gitlab dem Deployment-Benutzer (<code>examibur-bot</code>) den generierten Schlüssel hinzufügen (<code>Profile</code> - <code>Edit</code> - <code>SSH Keys</code> - <code>Add an SSH key</code>).</p>
+
+<p>Git-SSH-Key auf den Server kopieren</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">scp git root@<span class="nv">$SERVER_IP</span>:/root/.ssh/id_rsa
+scp git.pub root@<span class="nv">$SERVER_IP</span>:/root/.ssh/id_rsa.pub
+</code></pre></div>
+<p>Auf dem Server anmelden:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ssh root@<span class="nv">$SERVER_IP</span>
+</code></pre></div>
+<p>Korrekte Berechtigung der erstellten Keys setzen </p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">chmod -R 700 /root/.ssh/
+</code></pre></div>
+<p>Das Repository klonen</p>
+<div class="highlight"><pre><code class="language-" data-lang="">git clone git@gitlab.com:engineering-projekt/examibur.git /opt/examibur
+</code></pre></div>
+<p>Automatisches Re-Deployment des Stating-Environment einrichten:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">useradd deploy -d /home/deploy
+mkdir -p -m 700 /home/deploy/.ssh/
+
+# NUR das folgende Kommando auf dem Client mit den generierten Schlüsseln ausführen;
+scp ssh.pub root@$SERVER_IP:/home/deploy/.ssh/authorized_keys
+
+cp /opt/examibur/projekteserver/deploy/trigger_deploy.sh /home/deploy/trigger_deploy.sh
+
+chown -R deploy /home/deploy/
+chmod +x /home/deploy/trigger_deploy.sh
+</code></pre></div>
+<p>In der Datei <code>/etc/ssh/sshd_config</code> folgende Zeilen am Ende der Datei ergänzen</p>
+<div class="highlight"><pre><code class="language-" data-lang="">Match User deploy
+        ForceCommand /home/deploy/trigger_deploy.sh
+</code></pre></div>
+<p>anschliessend den SSH daemon neu starten:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">systemctl restart sshd.service
+</code></pre></div>
+<p>Testen auf dem Client, ob Zugriff via SSH Funktioniert:</p>
+<div class="highlight"><pre><code class="language-" data-lang="">ssh -i ssh deploy@$SERVER_IP
+</code></pre></div>
+<p>Login auf der eigenen Registry (credentials von <code>examibur-bot</code>)</p>
+<div class="highlight"><pre><code class="language-" data-lang="">docker login registry.gitlab.com
+</code></pre></div>
+<p>Spezifische Umgebungsvariablen kopieren</p>
+<div class="highlight"><pre><code class="language-" data-lang="">cp -R /opt/examibur/projekteserver/env_templates/ /opt/examibur/projekteserver/env/
+</code></pre></div>
+<p><strong>und anschliessend anpassen und sichern (nicht im Backup eingschlossen!)</strong></p>
+
+<p>Service, welcher die docker-compose Dienste startet registrieren.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">systemctl link /opt/examibur/projekteserver/systemd/examibur-dev.service 
+systemctl start examibur-dev.service
+</code></pre></div>
+<p>Die Zertifikate werden nun das erste mal generiert. Das log kann mit <code>journalctl -xe -f --unit examibur-dev.service</code> eingesehen werden.
+Ist alles erfolgreich gestratet (vorallem sonarqube dauert seine gute Zeit...), dann kann der dienst neu gestartet werden.</p>
+<div class="highlight"><pre><code class="language-" data-lang="">systemctl start examibur-dev.service
+</code></pre></div>
+<p>Nun sollte die Webseite über die definierten URLs erreichbar sein.</p>
+
+<p>Redeploy service registrieren</p>
+<div class="highlight"><pre><code class="language-" data-lang="">systemctl link /opt/examibur/projekteserver/systemd/examibur-redeploy.service 
+systemctl start examibur-redeploy.service
+</code></pre></div>
+<p>Backup task einrichten</p>
+<div class="highlight"><pre><code class="language-" data-lang="">systemctl link /opt/examibur/projekteserver/systemd/examibur-backup.service
+systemctl link /opt/examibur/projekteserver/systemd/examibur-backup.timer
+systemctl start examibur-backup.timer
+systemctl start examibur-backup.service # First Backup!
+</code></pre></div>
+<h2 id="installation-gitlab-worker">Installation Gitlab Worker</h2>
+
+<ul>
+<li>Installation gemäss <a href="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/release_process/README.md">Dokumentation</a></li>
+<li>Dediziertes Docker-Netzwerk erstellen
+
+<ul>
+<li><code>docker network create examibur_examibur</code></li>
+</ul></li>
+<li>Eigene Konfiguration überschreiben (<code>/etc/gitlab-runner/config.toml</code>):</li>
+</ul>
+<div class="highlight"><pre><code class="language-" data-lang="">concurrent = 1
+check_interval = 0
+
+[[runners]]
+  name = "sinv-56077"
+  url = "https://gitlab.com/ci/"
+  token = "REPLACE_ME"
+  executor = "docker"
+  [runners.docker]
+    tls_verify = false
+    image = "docker:1.13-dind"
+    network_mode = "examibur_examibur"
+    privileged = true
+    disable_cache = false
+    volumes = ["/cache", "/root/.gradle/", "/var/run/docker.sock:/var/run/docker.sock"]
+  [runners.cache]
+
+</code></pre></div>
+
+        <hr>
+
+        <footer>
+            <p>&copy; 2017 Jonas Matter, Patrick Scherler, Robin Suter, Raphael Zimmermann</p>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{
+    "Sprint 1": {
+        "timePlanned": 70.7,
+        "teamSpeed": 60.7
+    },
+    "Sprint 2": {
+        "timePlanned": 61.7,
+        "teamSpeed": 60.7
+    },
+    "Sprint 3": {
+        "timePlanned": 60.7,
+        "teamSpeed": 61.25
+    },
+    "Sprint 4": {
+        "timePlanned": 61.0,
+        "teamSpeed": 57.5
+    },
+    "Sprint 5": {
+        "timePlanned": 59.5,
+        "teamSpeed": 59.5
+    },
+    "Sprint 6": {
+        "timePlanned": 60.5,
+        "teamSpeed": 60.5
+    }
+}

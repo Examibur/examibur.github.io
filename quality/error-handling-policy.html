@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Examibur - Error-Handling Policy</title>
+
+    
+    
+    
+
+        <link href="../website/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../website/css/custom.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="..">
+            <img src="../website/images/logo-white-transparent-rotated.png">
+            Examibur
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+        <a href="../index.html">
+            <div class="container">
+                <h1>Error-Handling Policy</h1>
+            </div>
+        </a>
+        </a>
+    </div>
+
+    <div class="container">
+        <h1 id="error-handling-policy">Error-Handling Policy</h1>
+
+<ul>
+<li>Alle Daten auf der Datenbank sind sicher und müssen beim Laden nicht mehr mit Barrikaden überprüft werden.
+
+<ul>
+<li>Sicherheit wird vor dem Schreiben in die Datenbank sichergestellt.</li>
+</ul></li>
+<li>Alle Daten, welche in das System von aussen (via Web oder Prüfungsimport) eingelesen werden, müssen über Barrikaden verifiziert werden.
+
+<ul>
+<li>Dem Benutzer müssen beim Import verständliche Fehlermeldungen angezeigt werden.</li>
+<li>Eingabe-Validierung wird im Browser und auf dem Server durchgeführt und im Fehlerfall eine Fehlermeldung angezeigt.</li>
+<li>Die Serverseitige Validierung muss kein detailiertes Feedback zurückliefern.</li>
+<li>Bei unerwarteten Exceptions: Benutzerinformationen mit unerwartetem Fehler protokollieren.</li>
+</ul></li>
+</ul>
+
+<h2 id="exception-policy">Exception-Policy</h2>
+
+<ul>
+<li>Ein globaler Exception Handler protokolliert unerwartete Exceptions. Die Applikation läuft weiter.</li>
+<li>Exceptions so lokal wie möglich behandeln.</li>
+<li>Daten (insbesondere Prüfung) müssen immer konsistent bleiben.</li>
+<li>Es gelten die Best-Practices nach Joshua Bloch&#39;s Effective Java (Addison-Wesley, 2001) (via <a href="https://www.ibm.com/developerworks/library/j-jtp05254/#artrelatedtopics">IBM DeveloperWorks - The exceptions debate</a>
+
+<ul>
+<li>Use exceptions only for exceptional conditions.</li>
+<li>Use checked exceptions for recoverable conditions and runtime exceptions for programming errors.</li>
+<li>Avoid unnecessary use of checked exceptions.</li>
+<li>Throw exceptions appropriate to the abstraction.</li>
+</ul></li>
+</ul>
+
+<h3 id="implementierung">Implementierung</h3>
+
+<ul>
+<li>Alle Exceptions, die der Integration-Layer werfen kann, werden vom Business-Layer gefangen, geloggt und weiter geworfen</li>
+<li>Der Business-Layer wirft nur Exceptions vom Typ <code>ExamiburException</code></li>
+<li>Als Subtypen von <code>ExamiburException</code> werden folgende Exceptions definiert:
+
+<ul>
+<li><code>ValidationException</code> für ungültige Werte, die vom User in den Service kommen und die Integrität der Daten verletzen würde</li>
+<li><code>InvalidParameter</code> für ungültige Funktions-Parameter, z.B. eine negative ID</li>
+<li><code>NotFoundException</code>, wenn eine angeforderte Ressource auf der Datenbank nicht gefunden wurde, aber zwingend ein Resultat benötigt wird</li>
+<li><code>AuthorizationException</code>, falls der User keine Berechtigung hat, diesen Service mit den spezifischen Argumenten aufzurufen</li>
+<li><code>CommunicationException</code>, wenn zwischen dem UI und dem Service ein Fehler in der Kommunikation auftritt</li>
+<li><code>IllegalOperationException</code>, falls eine ungültige Operation ausgeführt wird oder sich die Applikation in einem nicht dafür vorgesehenen Status befindet</li>
+</ul></li>
+<li>Der UI-Layer (Spark) verwaltet die Exceptions vom Business-Layer und zeigt dem User entsprechende verständliche (nicht-technische) Fehlermeldungen an</li>
+</ul>
+
+<h2 id="assertion-policy">Assertion Policy</h2>
+
+<ul>
+<li>Es werden keine Asserts verwendet, damit keine Diskrepanz zwischen Entwicklung und Produktion entstehen kann.
+
+<ul>
+<li>&quot;It is absurd to make elaborate security checks on debugging runs, when no trust is put in the results, and then remove them in production runs, when an erroneous result could be expensive or disastrous. What would we think of a sailing enthusiast who wears his lifejacket when training on dry land, but takes it off as soon as he goes to sea?&quot; - C.A.R. Hoare</li>
+</ul></li>
+</ul>
+
+<h2 id="logging-policy">Logging Policy</h2>
+
+<ul>
+<li>Ein Logfile wird auf dem Server geführt, welches mit externen Tools beobachtet werden kann.</li>
+<li>Es wird das Framework <a href="https://logging.apache.org/log4j/2.0/">Log4J</a> mit den folgenden Levels verwendet:
+
+<ul>
+<li>Debug (Default in Entwicklung)</li>
+<li>Info (Default in Produktion)</li>
+<li>Warning</li>
+<li>Error</li>
+</ul></li>
+<li>Exception müssen protokolliert werden, falls diese nicht korrekt behandelt werden konnten (inkl. Stack-Trace).</li>
+<li>Folgende Aktionen müssen auditierbar sein, sprich User- und relevante Daten protokolliert werden:
+
+<ul>
+<li>Administrative Aktionen</li>
+<li>Alles, was eine Prüfung verändert</li>
+<li>Ungültige Login-Versuche</li>
+<li>Passwortwechsel</li>
+</ul></li>
+</ul>
+
+
+        <hr>
+
+        <footer>
+            <p>&copy; 2017 Jonas Matter, Patrick Scherler, Robin Suter, Raphael Zimmermann</p>
+        </footer>
+    </div>
+</body>
+
+</html>

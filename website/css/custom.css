@@ -1,0 +1,92 @@
+.navbar-inverse .navbar-brand {
+    color: #fff;
+    padding-top: 3px;
+}
+.navbar-inverse {
+    background-color: #393e41;
+    border: none;
+}
+.navbar-brand > img {
+    display: inline-block;
+    height: 2.5em;
+}
+.container {
+    font-size: 1.9rem;
+    line-height: 180%;
+}
+.container img {
+    max-width: 100%;
+}
+
+.container table {
+     border-collapse: collapse;
+}
+
+.container table, th, td {
+   border: 1px solid black;
+}
+
+.container td, th {
+    padding: 1rem;
+}
+
+.container .no-export {
+    display: none;
+}
+
+.jumbotron{
+    padding-top: 80px;
+    background-color: #6b8fc6;
+}
+.jumbotron a, .jumbotron a:hover {
+    color: white;
+}
+
+a {
+    color: #6b8fc6;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.quicklink {
+    text-align: center;
+}
+.quicklink-icon {
+    font-size: 4rem;
+}
+
+.quicklink-title {
+    font-size: 2rem;
+}
+
+.list-group-item.document::before {
+    content: "\f02d";
+    font-family: FontAwesome;
+    padding-right: 1rem;
+}
+
+a.list-group-item {
+    font-size: 1.8rem;
+}
+
+figure > img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figcaption {
+    text-align: center;
+    font-size: 0.9em;
+}
+
+table {
+  width: 100%;
+}
+
+
+h4 {
+    font-weight: bold;
+}

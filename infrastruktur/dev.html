@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Examibur - Entwicklungsumgebung</title>
+
+    
+    
+    
+
+        <link href="../website/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../website/css/custom.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="..">
+            <img src="../website/images/logo-white-transparent-rotated.png">
+            Examibur
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+        <a href="../index.html">
+            <div class="container">
+                <h1>Entwicklungsumgebung</h1>
+            </div>
+        </a>
+        </a>
+    </div>
+
+    <div class="container">
+        <h2 id="system-voraussetzungen">System-Voraussetzungen</h2>
+
+<ul>
+<li>Java</li>
+<li>Gradle</li>
+<li>Eclipse mit den folgenden Plugins
+
+<ul>
+<li><a href="https://marketplace.eclipse.org/content/sonarlint">SonarLint</a></li>
+<li><a href="https://github.com/JorisAerts/Eclipse-Environment-Variables/">Eclipse-Environment-Variables</a></li>
+<li><a href="http://eclipse-cs.sourceforge.net/">CheckStyle</a></li>
+</ul></li>
+<li><a href="https://docs.docker.com/">Docker</a></li>
+<li><a href="https://docs.docker.com/compose/">Docker-Compose</a></li>
+</ul>
+
+<h2 id="entwicklungsumgebung-einrichten">Entwicklungsumgebung einrichten</h2>
+
+<ol>
+<li>Eclipse Projektdateien generieren:
+<code>bash
+cd /path/to/repository
+cd examibur/
+./gradlew eclipse
+</code></li>
+<li>Eclipse starten</li>
+<li>Projekt importieren
+
+<ul>
+<li><code>File</code> - <code>Import</code> - <code>Existing Projects into Workspace</code></li>
+<li>Pfad vom Repository im Feld <code>Select root directory</code> einfügen</li>
+<li>Abschliessen mit <code>Finish</code></li>
+</ul></li>
+<li>Gradle Nature hinzufügen:
+
+<ul>
+<li>Installiere Buildship Gradle Integration</li>
+<li><code>Help</code> - <code>Eclipse Marketplace</code> - <code>Find Buildship Gradle Integration</code> - <code>Install Now</code></li>
+<li>Rechtsklick auf Projekt</li>
+<li><code>Configure</code> - <code>Add Gradle Nature</code></li>
+</ul></li>
+</ol>
+
+<h3 id="editor-konfigurieren">Editor konfigurieren</h3>
+
+<p>Der Google Checkstyle verlangt für die Einrückung Spaces, in Eclipse werden aber standardmässig Tabs eingefügt. Zudem sind in Eclipse die Imports noch nach gewissen Packages sortiert (Java, Javax, etc.), im Checkstyle hingegen nur in lexikographischer Reihenfolge.</p>
+
+<ol>
+<li>Einstellungen öffnen mit <code>Window</code> - <code>Preferences</code></li>
+<li>Auf <code>Java</code> - <code>Code Style</code> - <code>Formatter</code> navigieren
+
+<ol>
+<li>Das <a href="resources/Formatter.xml">Formatter-Profil</a> importieren.</li>
+</ol></li>
+<li>Auf <code>Java</code> - <code>Code Style</code> - <code>Organize Imports</code> navigieren
+
+<ol>
+<li>Alle vordefinierten Packages löschen (<code>Java</code>, <code>Javax</code>, <code>org</code>, <code>com</code>)</li>
+</ol></li>
+</ol>
+
+<p>Wenn nun ein File noch komplett mit Tabs formatiert ist, alles markieren und mit <code>Ctrl</code> + <code>Shift</code> + <code>F</code> formatieren. Die Imports können auch automatisch mit <code>Ctrl</code> + <code>Shift</code> + <code>O</code> sortiert werden. <em>Tipp: Unter <code>Java</code> - <code>Editor</code> - <code>Save Actions</code> lassen sich diese Aktionen automatisch bei jedem Speichern ausführen.</em></p>
+
+<p>Für andere Filetypen, z.B. XML, müssen die Einstellungen separat gemacht werden. Für XML ist die Einstellung unter <code>Preferences</code> - <code>XML</code> - <code>XML Files</code> - <code>Editor</code> zu finden.</p>
+
+<h2 id="entwicklungsumgebung-starten">Entwicklungsumgebung starten</h2>
+
+<p>Die Application- und Datenbankserver (und die Projekt-Website) werden als Docker-Images bereitgestellt. Diese können für die Entwicklung einfach über Docker-Compose gestartet werden:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Startet alle Services (Ctrl + C um zu stoppen)</span>
+docker-compose up
+</code></pre></div>
+<p>Nun kann ganz klassisch in Eclipse entwickelt werden. Um die Applikation auf dem Applikation-Server zu deployen muss der Gradle Task <code>assemble</code> ausgeführt werden.</p>
+
+<p>Tipp: Falls du möchtest, dass nach jedem mal Speichern die Applikation neu deployed wird, kannst du den Gradle task &quot;continuous&quot; laufenlassen.</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd </span>examibur
+./gradlew assemble -t
+</code></pre></div>
+<h2 id="tomcat-debugging">Tomcat Debugging</h2>
+
+<ul>
+<li>Tomcat normal starten und aktuelle version darauf deployen</li>
+<li>Im Menu <code>Run</code> - <code>Debug Configurations...</code> eine neue Java Remote Application hinzufügen (falls nich nicht vorhanden)
+
+<ul>
+<li>Examibur als Projekt auswählen</li>
+<li>Verbindungsdetails: Host <code>localhost</code>, Port <code>8000</code></li>
+</ul></li>
+<li>Debuggung starten über den Debug-Button </li>
+</ul>
+
+<p><a href="http://stackoverflow.com/questions/3835612/remote-debugging-tomcat-with-eclipse">Siehe auch Schritt-für-Schritt-Anleitung auf Stackoverflow</a></p>
+
+<h2 id="psql">PSQL</h2>
+
+<p>Falls PSQL/PgAdmin lokal installiert sind können diese so genutzt werden, als wäre postgres lokal installiert, solange die Entwicklungsumgebung läuft (siehe oben). Die Zugangsdaten sind der Datei <code>docker-compose.yml</code> zu entnehmen.</p>
+
+<p>Alternativ kann PSQL auch über docker-compose genutzt werden: <code>docker-compose run postgres psql -h postgres -U examibur</code>. Das Kennwort findet sich in der Datei <code>docker-compose.yml</code>.</p>
+
+<h2 id="integration-tests-laufen-lassen">Integration-Tests laufen lassen</h2>
+
+<p>Hierfür ist es wichtig, dass alle Umgebungsvariablen korrekt gesetzt sind. Mittels docker können die Tests direkt ausgeführt werden - es ist aber bequemer dies über Eclipse selektiv zu tun. Da die Tests für db-konfigurationen etc. Umgebungsvariabeln benötigt, ist das Plugin <a href="https://github.com/JorisAerts/Eclipse-Environment-Variables">Eclipse-Environment-Variables</a> empfohlen. Folgende Variablen müssen gesetzt werden:</p>
+
+<ul>
+<li><code>DB_HOST</code> = <code>localhost</code></li>
+<li><code>DB_USER</code> (Siehe <code>docker-compose.yml</code>)</li>
+<li><code>DB_PASSWORD</code> (Siehe <code>docker-compose.yml</code>)</li>
+<li><code>LOG_LEVEL</code> = <code>debug</code></li>
+<li><code>LOG_FILE</code> = <code>examibur.log</code></li>
+</ul>
+
+<h2 id="ui-tests-laufen-lassen">UI-Tests laufen lassen</h2>
+
+<p>Um reproduzierbare Screenshots zu bekommen müssen diese Tests in einem Docker-Container laufen. Die UI-Tests können einfach mit folgendem Kommando im Projekt-Root ausgeführt werden:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">./tools/run-test-coverage.sh
+</code></pre></div>
+
+        <hr>
+
+        <footer>
+            <p>&copy; 2017 Jonas Matter, Patrick Scherler, Robin Suter, Raphael Zimmermann</p>
+        </footer>
+    </div>
+</body>
+
+</html>
